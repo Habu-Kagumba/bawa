@@ -1,0 +1,4 @@
+.content {
+  @include container(1140px);
+  min-height: 500px;
+}

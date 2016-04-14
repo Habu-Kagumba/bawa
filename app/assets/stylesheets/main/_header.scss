@@ -1,0 +1,32 @@
+.header {
+  @include container(1140px);
+  height: 100px;
+
+  .logo {
+    @include span(6 of 10);
+
+    img {
+      max-width: 350px;
+      min-width: 250px;
+      width: 100%;
+    }
+
+    @include breakpoint('only screen' 400px) {
+      @include span(5 of 10);
+    }
+
+    @include breakpoint('only screen' 600px) {
+      @include span(4 of 10);
+    }
+  }
+
+  .account {
+    $link-color: #fff;
+
+    @include span(2 of 10 last);
+    a {
+      @include button;
+    }
+  }
+
+}

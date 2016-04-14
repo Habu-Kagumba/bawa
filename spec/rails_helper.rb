@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'coveralls'
+require 'capybara/poltergeist'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -69,13 +70,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-Capybara::Webkit.configure do |config|
-  config.debug = false
-  config.block_unknown_urls
-  config.timeout = 5
-  config.ignore_ssl_errors
-  config.skip_image_loading
-end
+Capybara.javascript_driver = :poltergeist
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

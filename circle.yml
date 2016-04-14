@@ -1,8 +1,0 @@
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: bawa-staging
-machine:
-  ruby:
-    version: 2.3.0

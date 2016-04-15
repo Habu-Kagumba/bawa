@@ -1,18 +1,14 @@
 engines:
   rubocop:
     enabled: true
-  eslint:
-    enabled: true
   duplication:
     enabled: true
     config:
       languages:
       - ruby
-      - javascript
 ratings:
   paths:
   - "**.rb"
-  - "**.js"
 exclude_paths:
 - "vendor/**/*"
 - "db/schema.rb"

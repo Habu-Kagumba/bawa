@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.0"
 
+gem "autoprefixer-rails"
 gem "bourbon"
 gem "breakpoint"
 gem "coveralls", require: false

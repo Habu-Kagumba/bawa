@@ -6,6 +6,7 @@ AllCops:
     - "config/**/*"
     - "spec/rails_helper.rb"
     - "spec/spec_helper.rb"
+    - "Guardfile"
   UseCache: false
 Style/CollectionMethods:
   Description: Preferred collection methods.

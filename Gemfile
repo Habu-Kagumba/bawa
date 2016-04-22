@@ -31,6 +31,9 @@ group :development, :test do
   gem "poltergeist"
   gem "database_cleaner"
   gem "factory_girl_rails"
+  gem "guard", :require => false
+  gem "guard-livereload", :require => false
+  gem "guard-rspec", :require => false
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "spring"

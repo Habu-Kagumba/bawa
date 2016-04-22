@@ -1,10 +1,12 @@
 <header class="header">
   <nav>
     <div class="logo">
-      <%= image_tag "bawa.svg" %>
+      <%= link_to image_tag("bawa.svg"), root_path %>
     </div>
     <div class="account">
-      <%= link_to "Sign in", "#" %>
+      <%= link_to new_user_url do %>
+        <i class="icon-people"></i> Sign in
+      <% end %>
     </div>
   </nav>
 </header>

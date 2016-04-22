@@ -1,0 +1,52 @@
+.users {
+  $white: #fff;
+
+  h1 {
+    color: $white;
+    text-align: center;
+  }
+
+  .signup-form {
+    margin: 0 auto;
+    width: 70%;
+
+    .errors {
+      background: $color-main;
+      li {
+        color: $white;
+        padding: 10px;
+        i {
+          color: $white;
+        }
+      }
+    }
+
+    form {
+      float: left;
+      background-color: $white;
+      padding: 20px;
+    }
+
+    label.error {
+      color: $color-main;
+      font-size: em(14);
+    }
+
+    .fname, .lname {
+      @include span(4.9 of 10);
+      @include position(relative);
+    }
+
+    .submit, .pwd, .pwd-conf, .username, .email {
+      @include span(10 of 10);
+      @include position(relative);
+    }
+
+    .field_with_errors {
+      input {
+        border: 1px solid $color-main;
+        box-shadow: 0 0 5px $color-main;
+      }
+    }
+  }
+}

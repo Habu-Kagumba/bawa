@@ -1,0 +1,55 @@
+<% provide(:title, "Signup") %>
+<section>
+    <div class="content user-content <%= controller_name %> <%= action_name %>">
+    <h1>Sign up</h1>
+
+    <div class="signup-form">
+      <% if @user.errors.any? %>
+        <div class="flash-error">
+          The form contains <%= pluralize(@user.errors.count, "error") %>.
+        </div>
+        <ul class="errors">
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><i class="icon-close"></i> <%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= form_for(@user) do |f| %>
+        <div class="fname">
+          <label for="user_first_name"><i class="icon-user"></i> First Name</label>
+          <%= f.text_field :first_name, placeholder: "Enter your first name.", required: true %>
+        </div>
+
+        <div class="lname">
+          <label for="user_last_name"><i class="icon-user"></i> Last Name</label>
+          <%= f.text_field :last_name, placeholder: "Enter your last name.", required: true %>
+        </div>
+
+        <div class="username">
+          <label for="user_username"><i class="icon-user"></i> Username</label>
+          <%= f.text_field :username, placeholder: "Enter your username.", required: true %>
+        </div>
+
+        <div class="email">
+          <label for="user_email"><i class="icon-envelope"></i> Email</label>
+          <%= f.email_field :email, placeholder: "Enter your email address.", required: true %>
+        </div>
+
+        <div class="pwd">
+          <label for="user_password"><i class="icon-lock"></i> Password</label>
+          <%= f.password_field :password, placeholder: "Enter your password.", required: true %>
+        </div>
+
+        <div class="pwd-conf">
+          <label for="user_password_confirmation"><i class="icon-lock"></i> Password Confirmation</label>
+          <%= f.password_field :password_confirmation, placeholder: "Repeat your password.", required: true %>
+        </div>
+
+        <div class="submit">
+          <%= f.submit "Create my account" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

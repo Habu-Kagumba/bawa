@@ -3,16 +3,19 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
-require 'rspec/rails'
-require 'capybara/rspec'
-require 'database_cleaner'
-require 'coveralls'
 require 'capybara/poltergeist'
+require 'capybara/rspec'
+require 'coveralls'
+require 'database_cleaner'
+require 'rspec/rails'
+require 'simplecov'
+require 'spec_helper'
 
 # Add additional requires below this line. Rails is not loaded until this point!
-
-Coveralls.wear!
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -70,7 +73,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, { debug: true, js_errors: false })
+end
+
+Capybara.default_driver = :poltergeist
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

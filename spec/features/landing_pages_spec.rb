@@ -1,17 +1,19 @@
 require "rails_helper"
 
-RSpec.feature "LandingPages", type: :feature do
+RSpec.feature "LandingPages" do
   before do
-    Capybara.default_driver = :poltergeist
+    visit root_path
   end
 
-  scenario "the landing page should have the applications tagline." do
-    visit root_path
-
+  scenario "Landing page tagline." do
     within "div.content" do
       expect(page).to have_selector(
         "h1", text: "Bawa Secure and reliable flight booking."
       )
     end
+  end
+
+  scenario "Signin button" do
+    expect(page).to have_link("Sign in")
   end
 end

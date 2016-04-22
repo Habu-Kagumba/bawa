@@ -1,0 +1,7 @@
+<% provide(:title, "Profile") %>
+<section>
+  <div class="content user-content">
+    <h1>Welcome <%= name @user %></h1>
+    <%= gravatar_for @user %>
+  </div>
+</section>

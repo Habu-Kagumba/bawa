@@ -1,7 +1,9 @@
 @import 'foundation/normalize';
 @import 'bourbon';
+@import 'base/base';
 @import 'breakpoint';
 @import 'susy';
 @import 'helpers/vars';
 @import 'foundation/type';
-@import 'base';
+@import 'foundation/simple_line_icons';
+@import 'base_styles';

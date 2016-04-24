@@ -1,5 +1,5 @@
 $(document).on('page:change', () => {
-  $('#new_user').validate({
+  $('.user-forms').validate({
     rules: {
       'user[first_name]': {
         required: true,

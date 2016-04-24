@@ -16,7 +16,7 @@ RSpec.describe SessionsController, type: :controller do
     context "logout user" do
       before { delete :destroy }
 
-      it { should redirect_to(root_path) }
+      it { should redirect_to(login_path) }
     end
   end
 

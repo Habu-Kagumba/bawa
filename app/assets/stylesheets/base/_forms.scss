@@ -15,6 +15,7 @@ label {
   display: block;
   font-weight: 600;
   margin-bottom: $small-spacing / 2;
+  margin-top: $small-spacing / 2;
 }
 
 input,
@@ -33,7 +34,6 @@ select[multiple] {
   box-sizing: border-box;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  margin-bottom: $small-spacing;
   padding: $base-spacing / 3;
   transition: border-color $base-duration $base-timing;
   width: 100%;

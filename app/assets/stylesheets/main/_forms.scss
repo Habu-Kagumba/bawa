@@ -1,10 +1,6 @@
 .form {
   margin: 0 auto;
 
-  @include breakpoint($tablet) {
-    width: 70%;
-  }
-
   .errors {
     background: $color-main;
     li {
@@ -22,6 +18,10 @@
     width: 100%;
     background-color: $white;
 
+    .submit {
+      margin-top: $small-spacing;
+    }
+
     @include breakpoint($tablet) {
       padding: 20px;
       width: 100%;
@@ -29,8 +29,27 @@
   }
 
   label.error {
-    color: $color-main;
+    background-color: $color-main;
+    color: $white;
     font-size: em(14);
+    padding: 3px;
+    @include position(relative, null null null null);
+		&:after {
+      border: solid transparent;
+			bottom: 100%;
+			content: ' ';
+			height: 0;
+			pointer-events: none;
+			position: absolute;
+			right: 0;
+			width: 0;
+		}
+    &:after {
+      border-color: rgba(0, 0, 0, 0);
+      border-bottom-color: $color-main;
+      border-width: 5px;
+      margin-left: -5px;
+    }
   }
 
   .field_with_errors {

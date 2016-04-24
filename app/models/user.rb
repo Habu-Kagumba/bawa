@@ -35,10 +35,9 @@ class User < ActiveRecord::Base
             email: true
 
   validates :password,
-            confirmation: true,
-            length: { in: 8..20 }
-
-  validates :password_confirmation, presence: true
+            presence: true,
+            length: { in: 8..20  },
+            allow_nil: true
 
   has_secure_password
 

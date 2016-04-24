@@ -1,7 +1,18 @@
 <% provide(:title, "Profile") %>
 <section>
-  <div class="content user-content">
-    <h1>Welcome <%= name @user %></h1>
-    <%= gravatar_for @user %>
+  <div class="content user-content <%= controller_name %> <%= action_name %>">
+    <div class="heading">
+      <%= gravatar_for @user %>
+      <h1>Welcome <%= name @user %></h1>
+    </div>
+
+    <div class="profile">
+        <aside>
+            <%= render "users/sidebar" %>
+        </aside>
+        <main>
+            <span>Content</span>
+        </main>
+    </div>
   </div>
 </section>

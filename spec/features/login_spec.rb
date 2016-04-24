@@ -34,7 +34,7 @@ RSpec.feature "Sessions" do
 
   describe "login with valid information using email" do
     before do
-      login_user_feature("email")
+      login_user_feature()
     end
 
     it { expect(page).to have_css(".flash-success") }
@@ -46,7 +46,7 @@ RSpec.feature "Sessions" do
 
   describe "login browser session" do
     before do
-      login_user_feature("email")
+      login_user_feature()
     end
 
     it "creates session cookies" do
@@ -71,23 +71,6 @@ RSpec.feature "Sessions" do
       expect(page).not_to have_content("Logout")
       expect(page).to have_content("Login")
       expect(page).to have_content("Sign in")
-    end
-  end
-
-  private
-
-  def login_user_feature(user_email)
-    create(:user)
-
-    visit "/login"
-
-    within ".form" do
-      fill_in("session_email_username",
-              with: attributes_for(:user)[user_email.to_sym])
-      fill_in("session_password", with: attributes_for(:user)[:password])
-      check("Remember me")
-
-      click_button("Log in")
     end
   end
 end

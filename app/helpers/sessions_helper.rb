@@ -27,6 +27,10 @@ module SessionsHelper
     end
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -35,5 +39,14 @@ module SessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
+  end
+
+  def redirect_on_login(where)
+    redirect_to(session[:url] || where)
+    session.delete(:url)
+  end
+
+  def store_url
+    session[:url] = request.fullpath
   end
 end

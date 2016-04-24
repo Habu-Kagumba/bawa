@@ -5,7 +5,7 @@ RSpec.feature "User signup" do
     before do
       visit "/profile/new"
 
-      within ".new_user" do
+      within ".user-forms" do
         fill_in("user_first_name", with: "John")
         fill_in("user_last_name", with: "Kags")
         fill_in("user_password", with: "johnkags")
@@ -26,7 +26,7 @@ RSpec.feature "User signup" do
   scenario "sign up new user with errors" do
     visit "/profile/new"
 
-    within ".new_user" do
+    within ".user-forms" do
       fill_in("user_first_name", with: "John")
       fill_in("user_last_name", with: "Kags")
       fill_in("user_password", with: "johnkagz")

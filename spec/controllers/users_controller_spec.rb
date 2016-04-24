@@ -2,22 +2,36 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   before :each do
-    create(:user)
+    @user = create(:user)
   end
 
   describe "Templates" do
     context "visit profile show page" do
-      before { get :show, id: 1 }
+      before do
+        login_as(@user)
+        get :show, id: 1
+      end
 
       it { should render_template("show") }
       it { should render_with_layout("application") }
     end
 
     context "visit profile edit page" do
-      before { get :edit, id: 1 }
+      before do
+        login_as(@user)
+        get :edit, id: 1
+      end
 
       it { should render_template("edit") }
       it { should render_with_layout("application") }
+    end
+
+    context "visit profile edit page anonymously" do
+      before do
+        get :edit, id: 1
+      end
+
+      it { should redirect_to(login_url) }
     end
 
     context "visit profile new page" do

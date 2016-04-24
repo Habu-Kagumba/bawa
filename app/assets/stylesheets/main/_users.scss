@@ -1,5 +1,21 @@
 .users {
+  .heading {
+    @include container(1140px);
+    img {
+      @include span(2 of 10);
+      border-radius: 100%;
+      width: 60px;
+      @include breakpoint($mobile) {
+        width: 100px;
+      };
+    }
+    h1 {
+      @include span(7 of 10);
+    }
+  }
+
   .form {
+    @include container(1140px);
     .fname, .lname {
       @include span(10 of 10);
       @include position(relative);
@@ -12,6 +28,53 @@
     .submit, .pwd, .pwd-conf, .username, .email {
       @include span(10 of 10);
       @include position(relative);
+    }
+  }
+
+  .profile {
+    margin-top: 40px;
+    @include container(1140px);
+    aside {
+      @include span(10 of 10 wide);
+      span {
+        color: $white;
+        display: none;
+        font-weight: bold;
+        @include breakpoint($tablet) {
+          display: block;
+        };
+      }
+      a {
+        border-bottom: 0;
+        border-right: 1px solid $white;
+        color: $white;
+        display: inline-block;
+        padding: 8px;
+        &:last-child {
+          border-right: 0;
+        }
+        @include breakpoint($tablet) {
+          border-bottom: 1px solid $white;
+          display: block;
+          padding: 8px 0;
+          &:last-child {
+            border-bottom: 0;
+            border-right: 1px solid $white;
+          }
+        };
+      }
+      @include breakpoint($tablet) {
+        @include span(1.5 of 10 wide);
+      };
+    }
+    main {
+      @include span(10 of 10 wide);
+      background-color: $white;
+      margin-top: 10px;
+      padding: 10px;
+      @include breakpoint($tablet) {
+        @include span(7 of 10 wide);
+      };
     }
   }
 }

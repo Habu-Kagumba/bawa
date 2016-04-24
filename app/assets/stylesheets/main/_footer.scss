@@ -3,6 +3,9 @@
   height: 60px;
 
   .tia {
-    @include span(2 of 10);
+    color: $white;
+    padding: 20px;
+
+    @include span(10 of 10);
   }
 }

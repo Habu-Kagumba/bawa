@@ -3,7 +3,7 @@
     <div class="content user-content <%= controller_name %> <%= action_name %>">
     <h1>Sign up</h1>
 
-    <div class="signup-form">
+    <div class="form">
       <% if @user.errors.any? %>
         <div class="flash-error">
           The form contains <%= pluralize(@user.errors.count, "error") %>.

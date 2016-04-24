@@ -10,7 +10,8 @@ RSpec.feature "ProfilePage" do
 
     within "div.user-content" do
       expect(page).to have_selector(
-        "h1", text: "Welcome #{attributes_for(:user)[:first_name]} #{attributes_for(:user)[:last_name]}"
+        "h1", text: "Welcome #{attributes_for(:user)[:first_name]}"\
+        " #{attributes_for(:user)[:last_name]}"
       )
     end
   end

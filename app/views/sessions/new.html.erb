@@ -1,0 +1,36 @@
+<% provide(:title, "Login") %>
+<section>
+  <div class="content login-content <%= controller_name %> <%= action_name %>">
+    <h1>Login</h1>
+
+    <div class="form" id="session_form">
+      <%= form_for(:session, url: login_path) do |f| %>
+
+        <div class="email-username">
+          <label for="session_email_username"><i class="icon-user"></i> Username or Email</label>
+          <%= f.text_field :email_username, placeholder: "Enter your username or email address", required: false %>
+        </div>
+
+        <div class="pwd">
+          <label for="session_password"><i class="icon-lock-open"></i> Password</label>
+          <%= f.password_field :password, placeholder: "Enter your password", required: false %>
+        </div>
+
+        <div class="chk">
+            <%= f.label :remember_me do %>
+                <%= f.check_box :remember_me %>
+                <span class="checkbox">Remember me</span>
+            <% end %></span>
+        </div>
+
+        <div class="submit">
+          <%= f.submit "Log in" %>
+        </div>
+      <% end %>
+
+      <div class="login-register">
+        New user? <%= link_to "Register here", signup_path %>
+      </div>
+    </div>
+  </div>
+</section>

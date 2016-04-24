@@ -18,7 +18,7 @@ Bundler.require(*Rails.groups)
 
 module Bawa
   class Application < Rails::Application
-    # Add webfints location
+    # Add webfonts location
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -54,9 +54,11 @@ $flashes: (
 @import 'helpers/hacks';
 @import 'helpers/mixins';
 @import 'main/header';
-@import 'main/content';
 @import 'main/footer';
+@import 'main/forms';
+@import 'main/content';
 @import 'main/users';
+@import 'main/sessions';
 
 // Main styles
 
@@ -72,15 +74,29 @@ body {
     height: auto;
     min-height: 100%;
     $hero-background-top: transparentize(black, 0.2);
-    $hero-background-bottom: transparentize(black, 0.5);
+    $hero-background-bottom: transparentize(black, 0.9);
     $hero-color: white;
-    $gradient-angle: 45deg;
+    $gradient-angle: -250deg;
     $header-image: '<%= asset_path 'bawa-back.png' %>';
 
     @include background-image(linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), url($header-image), no-repeat $hero-background-top scroll);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+
+    .content {
+      @include container(1140px);
+      min-height: 500px;
+      width: 95%;
+      margin: 0 auto;
+      h1 {
+        color: $white;
+        text-align: center;
+        small {
+          color: $white;
+        }
+      }
+    }
   }
 }
 

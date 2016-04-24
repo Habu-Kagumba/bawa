@@ -1,0 +1,22 @@
+.sessions {
+  .form {
+    .submit, .pwd, .email {
+      @include span(10 of 10);
+      @include position(relative);
+    }
+    .login-register {
+      float: left;
+      padding-top: 20px;
+      color: $white;
+      font-size: em(17);
+      a {
+        color: $white;
+        text-decoration: underline;
+        &:hover {
+          color: $color-sec;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

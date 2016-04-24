@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      log_in @user
       flash[:success] = "Successfully created your account. Welcome to Bawa."
       redirect_to @user
     else
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def check_username
-    @user = User.find_by(username: params[:user][:username])
+    @user = User.find_by_username(params[:user][:username])
 
     respond_to do |format|
       format.json { render json: !@user }

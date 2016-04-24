@@ -76,21 +76,22 @@ RSpec.describe UsersController, type: :controller do
   describe "Validation" do
     context "validate email" do
       it do
-        post :check_email, user: { email: "habu@kagumba.com" }, format: :json
+        post :check_email, user: { email: "herbert.kagumba@example.com" },
+          format: :json
 
         should respond_with(200)
 
-        expect(response.body).to eq "true"
+        expect(response.body).to eq "false"
       end
     end
 
     context "validate username" do
       it do
-        post :check_username, user: { email: "habu@kagumbacom" }, format: :json
+        post :check_username, user: { username: "habu" }, format: :json
 
         should respond_with(200)
 
-        expect(response.body).to eq "true"
+        expect(response.body).to eq "false"
       end
     end
   end

@@ -42,6 +42,7 @@ group :development, :test do
   gem "rb-fsevent", :require => false
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "show_me_the_cookies"
   gem "simplecov", :require => false
   gem "spring"
 end

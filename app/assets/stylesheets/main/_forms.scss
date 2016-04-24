@@ -1,0 +1,42 @@
+.form {
+  margin: 0 auto;
+
+  @include breakpoint($tablet) {
+    width: 70%;
+  }
+
+  .errors {
+    background: $color-main;
+    li {
+      color: $white;
+      padding: 10px;
+      i {
+        color: $white;
+      }
+    }
+  }
+
+  form {
+    float: left;
+    padding: 10px;
+    width: 100%;
+    background-color: $white;
+
+    @include breakpoint($tablet) {
+      padding: 20px;
+      width: 100%;
+    }
+  }
+
+  label.error {
+    color: $color-main;
+    font-size: em(14);
+  }
+
+  .field_with_errors {
+    input {
+      border: 1px solid $color-main;
+      box-shadow: 0 0 5px $color-main;
+    }
+  }
+}

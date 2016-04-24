@@ -6,7 +6,7 @@ RSpec.feature "LandingPages" do
   end
 
   scenario "Landing page tagline." do
-    within "div.content" do
+    within "main.content" do
       expect(page).to have_selector(
         "h1", text: "Bawa Secure and reliable flight booking."
       )

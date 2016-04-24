@@ -12,11 +12,12 @@
   <body>
       <div class="wrap">
           <%= render "layouts/header" %>
-					<% flash.each do |message_type, message| %>
-						<%# <div class="flash-<%= message_type %1>"><%= message %1></div> %>
-                        <%= content_tag(:div, message, class: "flash-#{message_type}") %>
-					<% end %>
-          <%= yield %>
+          <main class="content" id="panel">
+            <% flash.each do |message_type, message| %>
+              <%= content_tag(:div, message, class: "flash-#{message_type}") %>
+            <% end %>
+            <%= yield %>
+          </main>
           <%= render "layouts/footer" %>
       </div>
   </body>

@@ -6,8 +6,6 @@ FactoryGirl.define do
     username "habu"
     password "password"
     password_confirmation "password"
-    sequence :email do |e|
-      "#{first_name}#{e}@example.com".downcase
-    end
+    email "herbert.kagumba@example.com"
   end
 end

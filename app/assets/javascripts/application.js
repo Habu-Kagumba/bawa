@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require init
+//= require main/header
 //= require main/users
+//= require main/auth

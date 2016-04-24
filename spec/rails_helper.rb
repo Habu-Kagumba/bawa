@@ -29,7 +29,7 @@ SimpleCov.formatters = [
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -71,10 +71,11 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include ShowMeTheCookies, :type => :feature
 end
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, { debug: true, js_errors: false })
+  Capybara::Poltergeist::Driver.new(app, { debug: false, js_errors: false })
 end
 
 Capybara.default_driver = :poltergeist
@@ -85,3 +86,5 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+include FeatureHelpers

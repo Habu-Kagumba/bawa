@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/andela-hkagumba/bawa.svg?branch=master)](https://travis-ci.org/andela-hkagumba/bawa)
-[![Coverage Status](https://coveralls.io/repos/github/andela-hkagumba/bawa/badge.svg?branch=master)](https://coveralls.io/github/andela-hkagumba/bawa?branch=master)
+[![Build Status](https://travis-ci.org/andela-hkagumba/bawa.svg?branch=develop)](https://travis-ci.org/andela-hkagumba/bawa)
+[![Coverage Status](https://coveralls.io/repos/github/andela-hkagumba/bawa/badge.svg?branch=develop)](https://coveralls.io/github/andela-hkagumba/bawa?branch=develop)
 
 # Bawa
 

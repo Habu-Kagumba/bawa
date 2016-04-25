@@ -29,21 +29,22 @@ end
 
 group :development, :test do
   gem "capybara"
+  gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_girl_rails"
-  gem "guard", :require => false
-  gem "guard-livereload", :require => false
-  gem "guard-rspec", :require => false
+  gem "guard", require: false
+  gem "guard-livereload", require: false
+  gem "guard-rspec", require: false
   gem "launchy"
   gem "poltergeist"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rack-livereload"
-  gem "rb-fsevent", :require => false
+  gem "rb-fsevent", require: false
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "show_me_the_cookies"
-  gem "simplecov", :require => false
+  gem "simplecov", require: false
   gem "spring"
 end
 

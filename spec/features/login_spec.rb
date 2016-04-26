@@ -1,13 +1,29 @@
 require "rails_helper"
 
 RSpec.feature "Sessions" do
-  describe "login with invalid information" do
+  describe "test js validation" do
     before do
       visit "/login"
 
       within ".form" do
         fill_in("session_email_username", with: "")
         fill_in("session_password", with: "")
+
+        click_button("Log in")
+      end
+    end
+
+    it { expect(page).to have_css(".error") }
+  end
+
+  describe "login with invalid information" do
+    before do
+      @user = create(:user)
+      visit "/login"
+
+      within ".form" do
+        fill_in("session_email_username", with: @user.email)
+        fill_in("session_password", with: "123s5678")
 
         click_button("Log in")
       end

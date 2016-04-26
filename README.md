@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/andela-hkagumba/bawa.svg?branch=develop)](https://travis-ci.org/andela-hkagumba/bawa)
 [![Coverage Status](https://coveralls.io/repos/github/andela-hkagumba/bawa/badge.svg?branch=develop)](https://coveralls.io/github/andela-hkagumba/bawa?branch=develop)
+[![Code Climate](https://codeclimate.com/github/andela-hkagumba/bawa/badges/gpa.svg)](https://codeclimate.com/github/andela-hkagumba/bawa)
 
 # Bawa
 

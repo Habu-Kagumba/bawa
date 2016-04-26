@@ -30,6 +30,24 @@ RSpec.feature "User signup" do
       fill_in("user_first_name", with: "John")
       fill_in("user_last_name", with: "Kags")
       fill_in("user_password", with: "johnkagz")
+      fill_in("user_password_confirmation", with: "johnkagz")
+      fill_in("user_email", with: "john@kags.com")
+      fill_in("user_username", with: "john_kagscom.0")
+
+      click_button("Create my account")
+    end
+
+    expect(page).to have_current_path("/profile")
+    expect(page).to have_css(".flash-error")
+  end
+
+  scenario "sign up new user with errors - test js validation" do
+    visit "/profile/new"
+
+    within ".user-forms" do
+      fill_in("user_first_name", with: "John")
+      fill_in("user_last_name", with: "Kags")
+      fill_in("user_password", with: "johnkagz")
       fill_in("user_password_confirmation", with: "johnkags")
       fill_in("user_email", with: "john@kags.com")
       fill_in("user_username", with: "john_kagscom")
@@ -37,7 +55,6 @@ RSpec.feature "User signup" do
       click_button("Create my account")
     end
 
-    expect(page).to have_current_path("/profile")
-    expect(page).to have_css(".flash-error")
+    expect(page).to have_css(".error")
   end
 end

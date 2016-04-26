@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash[:success] = "Successfully logged in"
       log_in(user)
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      params[:session][:remember_me] == "1" ? remember(user) : forget(user)
       redirect_to(user)
     else
       flash.now[:error] = "Invalid email/username and password combination"
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def check_username_email
     @user = get_user(params[:session][:email_username])
-    @user ? res = true : res = false
+    res = @user ? true : false
 
     respond_to do |format|
       format.json { render json: res }

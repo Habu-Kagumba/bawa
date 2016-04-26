@@ -3,7 +3,7 @@ module FeatureHelpers
     @request.session[:user_id] = user.id
   end
 
-  def login_user_feature(user_email="email")
+  def login_user_feature(user_email = "email")
     create(:user)
 
     visit "/login"

@@ -91,7 +91,7 @@ RSpec.describe UsersController, type: :controller do
     context "validate email" do
       it do
         post :check_email, user: { email: "herbert.kagumba@example.com" },
-          format: :json
+                           format: :json
 
         should respond_with(200)
 

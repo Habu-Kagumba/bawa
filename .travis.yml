@@ -5,6 +5,3 @@ services:
   postgresql
 before_script:
   - psql -c 'create database bawa_test;' -U postgres
-addons:
-  code_climate:
-    repo_token: 00fe20aadaadfe9ef09125edf64bd3dfc48b0dffc071983c448a5a2fc4a67aeb

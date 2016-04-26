@@ -29,7 +29,6 @@ end
 
 group :development, :test do
   gem "capybara"
-  gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "guard", require: false

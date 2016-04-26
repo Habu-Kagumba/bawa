@@ -1,5 +1,9 @@
 window.Bawa || (window.Bawa = {})
 
-Bawa.init = () => console.log('Bawa is taking off...✈️ ')
+Bawa.init = function() {
+  console.log('Bawa is taking off...')
+}
 
-$(document).on('page:change', () => Bawa.init())
+$(document).on('page:change', function () {
+  Bawa.init()
+})

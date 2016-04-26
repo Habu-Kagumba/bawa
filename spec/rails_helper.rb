@@ -5,7 +5,6 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'capybara/poltergeist'
 require 'capybara/rspec'
-require "codeclimate-test-reporter"
 require 'coveralls'
 require 'database_cleaner'
 require 'rspec/rails'
@@ -17,7 +16,6 @@ SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
-CodeClimate::TestReporter.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

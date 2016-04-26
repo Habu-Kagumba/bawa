@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   validates :password,
             presence: true,
-            length: { in: 8..20  },
+            length: { in: 8..20 },
             allow_nil: true
 
   has_secure_password
@@ -58,9 +58,13 @@ class User < ActiveRecord::Base
   class << self
     # http://bit.ly/1pusLFu
     def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ?
-        BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      cost = ActiveModel::SecurePassword.min_cost ? mcost : BCrypt::Engine.cost
+
       BCrypt::Password.create(string, cost: cost)
+    end
+
+    def mcost
+      BCrypt::Engine::MIN_COST
     end
 
     def new_token

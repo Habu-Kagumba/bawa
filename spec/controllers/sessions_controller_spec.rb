@@ -43,12 +43,21 @@ RSpec.describe SessionsController, type: :controller do
 
     context "authenticated?" do
       it { expect(@user.authenticated?(@user.remember_token)).to be true }
-      it { expect(@user.authenticated?('password')).to be false }
+      it { expect(@user.authenticated?("password")).to be false }
     end
 
     context "forget user" do
       before { @user.forget }
-      it { expect(@user.remember_digest).to be_nil }
+      it { expect(@user.remember_digest).to be_blank }
+    end
+
+    context "logout user" do
+      before { delete :destroy }
+      it { expect(session[:user_id]).to be_blank }
+    end
+
+    context "remember user" do
+      it { expect(@user.remember_token).not_to be_blank }
     end
   end
 
@@ -56,8 +65,8 @@ RSpec.describe SessionsController, type: :controller do
     context "validate email for login" do
       it do
         post :check_username_email,
-          session: { email_username: "herbert.kagumba@example.com" },
-          format: :json
+             session: { email_username: "herbert.kagumba@example.com" },
+             format: :json
 
         should respond_with(200)
 
@@ -68,7 +77,7 @@ RSpec.describe SessionsController, type: :controller do
     context "validate username for login" do
       it do
         post :check_username_email,
-          session: { email_username: "habu" }, format: :json
+             session: { email_username: "habu" }, format: :json
 
         should respond_with(200)
 

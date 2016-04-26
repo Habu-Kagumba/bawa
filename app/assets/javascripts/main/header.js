@@ -1,2 +1,2 @@
-$(document).on('page:change', () => {
+$(document).on('page:change', function () {
 })

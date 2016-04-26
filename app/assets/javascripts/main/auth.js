@@ -1,4 +1,4 @@
-$(document).on('page:change', () => {
+$(document).on('page:change', function () {
   $('#session_form > form').validate({
     rules: {
       'session[email_username]': {

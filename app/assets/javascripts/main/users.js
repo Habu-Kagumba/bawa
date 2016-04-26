@@ -1,4 +1,4 @@
-$(document).on('page:change', () => {
+$(document).on('page:change', function () {
   $('.user-forms').validate({
     rules: {
       'user[first_name]': {

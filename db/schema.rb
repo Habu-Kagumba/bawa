@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424063356) do
+ActiveRecord::Schema.define(version: 20160426171059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "airports", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.datetime "departure_date"
+    t.datetime "arrival_date"
+    t.integer  "departure_location_id"
+    t.integer  "arrival_location_id"
+    t.string   "flight_number"
+    t.string   "airline"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "flights", ["arrival_location_id"], name: "index_flights_on_arrival_location_id", using: :btree
+  add_index "flights", ["departure_location_id"], name: "index_flights_on_departure_location_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

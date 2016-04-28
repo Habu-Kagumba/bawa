@@ -8,6 +8,8 @@ gem "bitters"
 gem "bourbon"
 gem "breakpoint"
 gem "coveralls", require: false
+gem "faker"
+gem "figaro"
 gem "friendly_id"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"

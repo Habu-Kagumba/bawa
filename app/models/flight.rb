@@ -6,10 +6,10 @@ class Flight < ActiveRecord::Base
 
   scope :destination, -> (loc_id) { where arrival_location_id: loc_id }
 
-  scope :when, lambda do |ddate|
+  scope :when, (lambda do |ddate|
     where("departure_date > ?", Date.parse(ddate).to_time).
       where("departure_date < ?", (Date.parse(ddate) + 1).to_time)
-  end
+  end)
 
   validates :departure_location_id, :arrival_location_id, :flight_number,
             :airline, :departure_date, :arrival_date,

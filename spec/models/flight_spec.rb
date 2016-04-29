@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Flight, type: :model do
   subject(:flight) do
@@ -32,22 +32,20 @@ RSpec.describe Flight, type: :model do
   describe "Search flights" do
     context "when I search for flights using airport" do
       it "using 'location airport' matches using the airport" do
-        expect(flight.airline).to eq Flight.filter({
-          location: 2}).first.airline
+        expect(flight.airline).to eq Flight.filter(location: 2).first.airline
       end
     end
 
     context "when I search for flights using airport" do
       it "using 'destination airport' matches using the airport" do
-        expect(flight.airline).to eq Flight.filter({
-          destination: 1}).first.airline
+        expect(flight.airline).to eq Flight.filter(destination: 1).first.airline
       end
     end
 
     context "when I search for flights using airport" do
       it "using 'departure date' matches using the airport" do
-        expect(flight.airline).to eq Flight.filter({
-          when: "2016-04-26 19:40"}).first.airline
+        expect(flight.airline).to eq Flight.
+          filter(when: "2016-04-26 19:40").first.airline
       end
     end
 

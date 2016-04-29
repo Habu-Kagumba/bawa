@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class Seed
   def airports
@@ -6,8 +6,8 @@ class Seed
     csv = CSV.parse(csv_txt, headers: true)
     csv.each do |row|
       a = Airport.new
-      a.name = row['name']
-      a.location = row['location']
+      a.name = row["name"]
+      a.location = row["location"]
       a.save
     end
   end
@@ -22,8 +22,8 @@ class Seed
     ]
 
     dept_arr_date = Faker::Time.forward(50, :all)
-    prefix = (0...3).map{ ("A".."Z").to_a[rand(26)] }.join
-    suffix = (0...2).map{ ("A".."Z").to_a[rand(26)] }.map(&:ord).join
+    prefix = (0...3).map { ("A".."Z").to_a[rand(26)] }.join
+    suffix = (0...2).map { ("A".."Z").to_a[rand(26)] }.map(&:ord).join
     f = Flight.new
     f.departure_date = dept_arr_date
     f.arrival_date = dept_arr_date + Random.rand(0..23).hours

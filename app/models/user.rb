@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor:remember_token
 
+  has_many :bookings
+
   extend FriendlyId
   friendly_id :username, use: :slugged
 

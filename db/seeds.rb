@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class Seed
   def airports
@@ -6,8 +6,8 @@ class Seed
     csv = CSV.parse(csv_txt, headers: true)
     csv.each do |row|
       a = Airport.new
-      a.name = row['name']
-      a.location = row['location']
+      a.name = row["name"]
+      a.location = row["location"]
       a.save
     end
   end

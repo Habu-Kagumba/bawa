@@ -22,14 +22,12 @@ class Seed
     ]
 
     dept_arr_date = Faker::Time.forward(50, :all)
-    prefix = (0...3).map { ("A".."Z").to_a[rand(26)] }.join
-    suffix = (0...2).map { ("A".."Z").to_a[rand(26)] }.map(&:ord).join
     f = Flight.new
     f.departure_date = dept_arr_date
     f.arrival_date = dept_arr_date + Random.rand(0..23).hours
     f.departure_location_id = Airport.order("RANDOM()").first.id
     f.arrival_location_id = Airport.order("RANDOM()").first.id
-    f.flight_number = prefix + suffix
+    f.flight_number = Faker::Code.flight(1..6)
     f.airline = airlines.sample
     f.save
   end

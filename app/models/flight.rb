@@ -1,6 +1,8 @@
 class Flight < ActiveRecord::Base
   belongs_to :departure_location, class_name: "Airport"
   belongs_to :arrival_location, class_name: "Airport"
+  has_many :bookings
+  has_many :passengers
 
   scope :location, -> (loc_id) { where departure_location_id: loc_id }
 

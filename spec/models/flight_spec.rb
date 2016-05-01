@@ -44,8 +44,8 @@ RSpec.describe Flight, type: :model do
 
     context "when I search for flights using airport" do
       it "using 'departure date' matches using the airport" do
-        expect(flight.airline).to eq Flight.filter(
-          when: "2016-04-26 19:40").first.airline
+        expect(flight.airline).to eq Flight.
+          filter(when: "2016-04-26 19:40").first.airline
       end
     end
 

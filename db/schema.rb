@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426171059) do
+ActiveRecord::Schema.define(version: 20160429084845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20160426171059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "bookings", force: :cascade do |t|
+    t.string   "booking_id"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.integer  "flight_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "bookings", ["flight_id"], name: "index_bookings_on_flight_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "flights", force: :cascade do |t|
     t.datetime "departure_date"
@@ -36,6 +48,19 @@ ActiveRecord::Schema.define(version: 20160426171059) do
 
   add_index "flights", ["arrival_location_id"], name: "index_flights_on_arrival_location_id", using: :btree
   add_index "flights", ["departure_location_id"], name: "index_flights_on_departure_location_id", using: :btree
+
+  create_table "passengers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "booking_id"
+    t.integer  "flight_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id", using: :btree
+  add_index "passengers", ["flight_id"], name: "index_passengers_on_flight_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

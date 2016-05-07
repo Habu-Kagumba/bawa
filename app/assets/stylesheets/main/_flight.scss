@@ -1,0 +1,198 @@
+h1.homy {
+  padding: 20px 10px;
+  margin: 54px 0;
+  font-size: em(50);
+}
+
+#search-results {
+  float: left;
+  margin-top: 15px;
+  width: 100%;
+
+  h4 {
+    color: $white;
+    text-align: right;
+  }
+
+  ul {
+    max-height: 500px;
+    overflow-y: scroll;
+    li {
+      div.single-flight {
+        background: transparentize($white, .2);
+        float: left;
+        padding: 15px 10px;
+        position: relative;
+        width: 100%;
+
+        span {
+          color: darken($grey, 30%);
+          display: inline-block;
+          float: left;
+
+          &.airline {
+            text-align: center;
+            width: 20%;
+
+            img {
+              display: block;
+              margin: 0 auto;
+              width: 33%;
+            }
+
+            small {
+              color: $grey;
+              display: block;
+              font-size: 60%;
+              text-align: center;
+            }
+          }
+
+          &.to {
+            @include position(relative, 29px null null null);
+
+            i {
+              color: $grey;
+              text-shadow: -5px 0 0 lighten($grey, 20%), -10px 0 0 lighten($grey, 30%);
+            }
+          }
+
+          &.dtimes, &.price, &.atimes {
+            font-size: em(16);
+            text-align: center;
+            position: relative;
+            width: 22%;
+
+            time, small {
+              color: $grey;
+              display: block;
+              text-align: center;
+            }
+
+            time {
+              font-size: em(24);
+              font-weight: bold;
+
+              > small {
+                font-size: 14px;
+                font-weight: normal;
+                @include position(absolute, 7px 20px null null);
+              }
+            }
+
+            small {
+              font-size: em(11);
+            }
+          }
+
+          &.price {
+            font-size: em(25);
+            font-weight: bold;
+            top: 18px;
+          }
+        }
+
+        button {
+          @include position(relative, 18px null null null);
+        }
+      }
+    }
+  }
+}
+
+#search-flights {
+  background: rgba(0,0,0,.5);
+  padding: 20px 5px;
+
+  input {
+    padding: 1.5em;
+  }
+
+  .search-flights-btn {
+    height: 74px;
+    text-align: center;
+    width: 23%;
+
+    i {
+      color: $white;
+    }
+  }
+}
+
+#pass {
+  width: (100% / 6) !important;
+}
+
+.destination_airport, .location_airport, #dept-date, #pass {
+  float: left;
+  position: relative;
+  width: (100% / 5);
+
+  i {
+    @include position(absolute, 10px 10px null null);
+    z-index: 2;
+  }
+}
+
+.twitter-typeahead {
+  width: 100%;
+
+  .tt-menu {
+    background-clip: padding-box;
+    background-color: $white;
+    margin-top: 2px;
+    min-width: 160px;
+    padding: 5px 0;
+    width: 200%;
+
+    .tt-dataset {
+
+      .tt-suggestion {
+        display: block;
+        margin: 0;
+        padding: 3px 20px;
+
+        span {
+          font-size: em(12);
+
+          .tt-highlight {
+            font-weight: bold;
+          }
+        }
+
+        &:hover {
+          background-color: $color-sec;
+          color: $white;
+
+          span, .tt-highlight {
+            color: $white;
+          }
+        }
+      }
+
+      .tt-cursor {
+        background-color: $color-sec;
+        color: $white;
+
+        span, .tt-highlight {
+          color: $white;
+        }
+      }
+
+      #typeahead-footer {
+        color: darken($grey, 60%);
+        display: block;
+        font-weight: 700;
+        height: auto;
+        padding: 3px 20px;
+        &:hover {
+          color: $color-main
+        }
+      }
+    }
+
+    &:hover {
+      @include prefixer(cursor, pointer, webkit moz);
+    }
+  }
+}

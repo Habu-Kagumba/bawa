@@ -3,4 +3,10 @@ class Airport < ActiveRecord::Base
 
   validates :name, presence: true
   validates :location, presence: true
+
+  class << self
+    def search(datum)
+      where("location ILIKE ? OR name ILIKE ?", "%#{datum}%", "%#{datum}%")
+    end
+  end
 end

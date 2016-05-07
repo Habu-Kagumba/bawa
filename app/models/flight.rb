@@ -4,26 +4,26 @@ class Flight < ActiveRecord::Base
   has_many :bookings
   has_many :passengers
 
-  scope :location, -> (loc_id) { where departure_location_id: loc_id }
+  before_save do
+    self.price = Faker::Commerce.price
+  end
 
-  scope :destination, -> (loc_id) { where arrival_location_id: loc_id }
+  scope :location, (lambda do |loc|
+    where("departure_location_id = ?", loc)
+  end)
+
+  scope :destination, (lambda do |dest|
+    where("arrival_location_id = ?", dest)
+  end)
 
   scope :when, (lambda do |ddate|
-    where("departure_date > ?", Date.parse(ddate).to_time).
+    where("departure_date > ?", (Date.parse(ddate) - 1).to_time).
       where("departure_date < ?", (Date.parse(ddate) + 1).to_time)
   end)
 
   validates :departure_location_id, :arrival_location_id, :flight_number,
             :airline, :departure_date, :arrival_date,
             presence: true
-
-  def departure_time
-    departure_date.strftime("%H:%M")
-  end
-
-  def arrival_time
-    arrival_date.strftime("%H:%M")
-  end
 
   class << self
     def filter(filtering_params)

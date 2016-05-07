@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429084845) do
+ActiveRecord::Schema.define(version: 20160506080713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,10 @@ ActiveRecord::Schema.define(version: 20160429084845) do
 
   create_table "bookings", force: :cascade do |t|
     t.string   "booking_id"
-    t.decimal  "price",      precision: 8, scale: 2
     t.integer  "flight_id"
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "bookings", ["flight_id"], name: "index_bookings_on_flight_id", using: :btree
@@ -42,8 +41,9 @@ ActiveRecord::Schema.define(version: 20160429084845) do
     t.integer  "arrival_location_id"
     t.string   "flight_number"
     t.string   "airline"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.decimal  "price",                 precision: 8, scale: 2
   end
 
   add_index "flights", ["arrival_location_id"], name: "index_flights_on_arrival_location_id", using: :btree

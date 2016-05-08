@@ -29,6 +29,7 @@ class Seed
     f.arrival_location_id = Airport.order("RANDOM()").first.id
     f.flight_number = Faker::Code.flight(1..6)
     f.airline = airlines.sample
+    f.price = Faker::Commerce.price
     f.save
   end
 
@@ -37,7 +38,7 @@ class Seed
     Flight.destroy_all
 
     airports
-    300.times { flights }
+    900.times { flights }
 
     puts "There are now #{Flight.count} flights in the db"
     puts "There are now #{Airport.count} airports in the db"

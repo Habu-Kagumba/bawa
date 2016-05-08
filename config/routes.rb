@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  root "flight#index"
+
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
   get "signup" => "users#new"
 
-  root "static#home"
+  get "airports" => "airport#index"
+
+  get "search_flight" => "flight#search_flights"
 
   post "users/check_email" => "users#check_email", as: :check_email
   post "users/check_username" => "users#check_username", as: :check_username

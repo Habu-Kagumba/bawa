@@ -4,7 +4,6 @@ class Booking < ActiveRecord::Base
   has_many :passengers
 
   before_save do
-    self.price = Faker::Commerce.price
     self.booking_id = Faker::Code.flight
   end
 

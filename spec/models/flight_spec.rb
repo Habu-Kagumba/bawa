@@ -15,16 +15,10 @@ RSpec.describe Flight, type: :model do
     end
   end
 
-  describe "departure and arrival times" do
-    context "when I get the departure time" do
-      it "has a departure time" do
-        expect(flight.departure_time).not_to be_blank
-      end
-    end
-
-    context "when I get the arrival time" do
-      it "has a arrival time" do
-        expect(flight.arrival_time).not_to be_blank
+  describe "Get the price" do
+    context "when I get the price of the flight" do
+      it "has a price" do
+        expect(flight.price).not_to be_blank
       end
     end
   end

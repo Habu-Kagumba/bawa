@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><%= full_title(yield(:title)) %></title>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>
-    <%= javascript_include_tag 'application', 'jquery.validate.min', 'additional-methods.min', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-      <div class="wrap">
-          <%= render "layouts/header" %>
-          <main class="content" id="panel">
-            <% flash.each do |message_type, message| %>
-              <%= content_tag(:div, message, class: "flash-#{message_type}") %>
-            <% end %>
-            <%= yield %>
-          </main>
-          <%= render "layouts/footer" %>
-      </div>
-  </body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title><%= full_title(yield(:title)) %></title>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>
+        <%= javascript_include_tag 'application', 'jquery.validate.min', 'additional-methods.min', 'type-ahead.min', 'jquery.datetimepicker.full.min', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+        <div id="loading">
+            <span class="loader"></span>
+        </div>
+        <div class="wrap">
+            <%= render "layouts/header" %>
+            <main class="content" id="panel">
+                <% flash.each do |message_type, message| %>
+                    <%= content_tag(:div, message, class: "flash-#{message_type}") %>
+                <% end %>
+                <%= yield %>
+            </main>
+            <%= render "layouts/footer" %>
+        </div>
+    </body>
 </html>

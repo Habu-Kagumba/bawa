@@ -52,10 +52,9 @@
     }
   }
 
-  .field_with_errors {
-    input {
-      border: 1px solid $color-main;
-      box-shadow: 0 0 5px $color-main;
-    }
+  input.error, .field_with_errors > input {
+    background-color: lighten($color-main, 50%) !important;
+    border: 1px solid $color-main;
+    box-shadow: 0 0 5px $color-main;
   }
 }

@@ -17,3 +17,4 @@
 //= require main/header
 //= require main/users
 //= require main/auth
+//= require main/flight

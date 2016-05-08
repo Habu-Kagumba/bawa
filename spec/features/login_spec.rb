@@ -33,7 +33,7 @@ RSpec.feature "Sessions" do
     it { expect(page).not_to have_content("Profile") }
     it { expect(page).not_to have_content("Logout") }
     it { expect(page).to have_content("Login") }
-    it { expect(page).to have_content("Sign in") }
+    it { expect(page).to have_content("Sign up") }
   end
 
   describe "login with valid information using username" do
@@ -45,7 +45,7 @@ RSpec.feature "Sessions" do
     it { expect(page).to have_content("Profile") }
     it { expect(page).to have_content("Logout") }
     it { expect(page).not_to have_content("Login") }
-    it { expect(page).not_to have_content("Sign in") }
+    it { expect(page).not_to have_content("Sign up") }
   end
 
   describe "login with valid information using email" do
@@ -57,7 +57,7 @@ RSpec.feature "Sessions" do
     it { expect(page).to have_content("Profile") }
     it { expect(page).to have_content("Logout") }
     it { expect(page).not_to have_content("Login") }
-    it { expect(page).not_to have_content("Sign in") }
+    it { expect(page).not_to have_content("Sign up") }
   end
 
   describe "login browser session" do
@@ -72,7 +72,7 @@ RSpec.feature "Sessions" do
       expect(page).to have_content("Profile")
       expect(page).to have_content("Logout")
       expect(page).not_to have_content("Login")
-      expect(page).not_to have_content("Sign in")
+      expect(page).not_to have_content("Sign up")
     end
 
     it "user auth information stored in session cookies" do
@@ -83,7 +83,7 @@ RSpec.feature "Sessions" do
       expect(page).to have_content("Profile")
       expect(page).to have_content("Logout")
       expect(page).not_to have_content("Login")
-      expect(page).not_to have_content("Sign in")
+      expect(page).not_to have_content("Sign up")
     end
   end
 end

@@ -47,9 +47,9 @@ $(document).on('page:change', function () {
 		}
   }).on(['typeahead:selected', 'typeahead:autocompleted'].join(' '), function(obj, datum) {
     $('#location').val(datum.id)
-  }).on('typeahead:change', function(obj, datum) {
-    if (datum === '') {
-      $('#location').val(datum)
+  }).on('keyup', function () {
+    if($('.tt-suggestion').length === 0){
+      $('#location').val('')
     }
   })
 
@@ -66,9 +66,9 @@ $(document).on('page:change', function () {
 		}
   }).on(['typeahead:selected', 'typeahead:autocompleted'].join(' '), function(obj, datum) {
     $('#destination').val(datum.id)
-  }).on('typeahead:change', function(obj, datum) {
-    if (datum === '') {
-      $('#destination').val(datum)
+  }).on('keyup', function () {
+    if($('.tt-suggestion').length === 0){
+      $('#destination').val('')
     }
   })
 

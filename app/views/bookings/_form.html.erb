@@ -1,0 +1,21 @@
+<section class="booking-form">
+    <%= form_for @booking do |f| %>
+        <%= f.hidden_field :flight_id %>
+        <div class="passenger-nested-forms">
+          <%= f.fields_for :passengers do |p| %>
+            <%= render "passenger_fields", f: p %>
+          <% end %>
+          <%= link_to_add_association f, :passengers do %>
+            <i class="icon-user"></i> Add Passenger
+          <% end %>
+        </div>
+        <div class="fare-details">
+          <h4><i class="icon-wallet"></i> Fare details</h4>
+          Passengers:&nbsp;&nbsp;&nbsp;<span><small>X</small> <span class="pass_number"><%= passengers %></span></span>
+          <div class="fare"><%= price %></div>
+          <%= f.hidden_field :price, id: "fare-price" %>
+          <span id="ze_price" style="display: none" data-price="<%= price %>"></span>
+        </div>
+        <%= f.submit %>
+    <% end %>
+</section>

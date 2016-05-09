@@ -1,5 +1,5 @@
 module FlightsHelper
-  def logo
-    image_tag(Faker::Company.logo)
+  def logo(url=Faker::Company.logo)
+    image_tag(url)
   end
 end

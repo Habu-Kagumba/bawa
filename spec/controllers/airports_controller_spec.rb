@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AirportController, type: :controller do
+RSpec.describe AirportsController, type: :controller do
   let(:json) { JSON.parse(response.body) }
 
   before :all do

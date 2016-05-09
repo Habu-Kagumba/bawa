@@ -7,4 +7,8 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def parse_html(html, xpath)
+    Nokogiri::HTML(html).at_xpath(xpath)
+  end
 end

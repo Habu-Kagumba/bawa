@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe FlightController, type: :controller do
+RSpec.describe FlightsController, type: :controller do
   let(:json) { JSON.parse(response.body) }
 
   before :all do
@@ -12,7 +12,7 @@ RSpec.describe FlightController, type: :controller do
   describe "Routes" do
     context "When I search for flights" do
       it do
-        should route(:get, "search_flight").to("flight#search_flights")
+        should route(:get, search_flight_path).to("flights#search_flights")
       end
     end
   end
@@ -38,7 +38,7 @@ RSpec.describe FlightController, type: :controller do
 
         should respond_with(200)
 
-        expect(json["count"]).to eql 1
+        expect(json["count"]).not_to be 0
       end
     end
   end

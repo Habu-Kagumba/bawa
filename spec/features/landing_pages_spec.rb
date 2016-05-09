@@ -19,15 +19,14 @@ RSpec.feature "LandingPages" do
   end
 
   scenario "Search for flights" do
-    within ".form" do
-      fill_in("location_name", with: "Dar El Salaam")
-      fill_in("destination_name", with: "Nairobi")
-      fill_in("when", with: "26/04/2016")
-      fill_in("passengers", with: "2")
-
-      click_button("Search flights")
-    end
-
+    search_for_flight
     expect(page).to have_content("1 result")
+  end
+
+  scenario "Choose a flight" do
+    search_for_flight
+    click_button("Book Now")
+
+    expect(page.current_path).to eql new_booking_path
   end
 end

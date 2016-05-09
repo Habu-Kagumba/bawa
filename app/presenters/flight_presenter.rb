@@ -2,6 +2,7 @@ require "delegate"
 
 class FlightPresenter < SimpleDelegator
   include ActionView::Helpers::NumberHelper
+  include FlightsHelper
 
   def flight_price
     number_to_currency(model.price, unit: "$")

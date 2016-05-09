@@ -27,4 +27,15 @@ module FeatureHelpers
       click_button("Save changes")
     end
   end
+
+  def search_for_flight
+    within ".form" do
+      fill_in("location_name", with: "Dar El Salaam")
+      fill_in("destination_name", with: "Nairobi")
+      fill_in("when", with: "26/04/2016")
+      fill_in("passengers", with: "2")
+
+      click_button("Search flights")
+    end
+  end
 end

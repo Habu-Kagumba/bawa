@@ -1,0 +1,49 @@
+<% provide(:title, "Bookings Confirmation") %>
+<article>
+    <section class="main-content">
+        <h1>Booking Details</h1>
+
+        <section class="booking-pg">
+            <div class="review-booking">
+                <section>
+                    <nav>Booking</nav>
+                    <div class="airline">
+                        <%= logo %>
+                        <span><%= @flight.airline %></span>
+                        <span><%= @flight.flight_number %></span>
+                    </div>
+                    <div class="loc_details">
+                        <span><%= @flight.departure_location.name %></span>
+                        <span><%= @flight.departure_time %> | <%= @flight.ddate %></span>
+                        <span><%= @flight.departure_location.location %></span>
+                    </div>
+                    <div class="sep">
+                        <i class="icon-plane"></i>
+                    </div>
+                    <div class="arr_details">
+                        <span><%= @flight.arrival_location.name %></span>
+                        <span><%= @flight.arrival_time %> | <%= @flight.adate %></span>
+                        <span><%= @flight.arrival_location.location %></span>
+                    </div>
+                    <div class="passenger-details">
+                        <h4>Passenger Details</h4>
+                        <% @booking.passengers.each do |p| %>
+                            <div class="person-icon">
+                                <i class="icon-people"></i>
+                            </div>
+                            <div class="person">
+                                <span><strong>Name:</strong> <%= p.first_name %> <%= p.last_name %></span>
+                                <span><strong>Email:</strong> <%= p.email %></span>
+                            </div>
+                        <% end %>
+                    </div>
+                </section>
+                <aside>
+                    <nav>Payment details</nav>
+                    <span class="booking-number"><strong>Booking Number:</strong> <%= @booking.booking_id %></span>
+                    <span class="final-fare"><%= number_to_currency(@booking.price, unit: '$') %></span>
+                </aside>
+            </div>
+        </section>
+    </section>
+</article>

@@ -7,7 +7,7 @@ gem "bcrypt"
 gem "bitters"
 gem "bourbon"
 gem "breakpoint"
-gem "coveralls", require: false
+gem "cocoon"
 gem "faker"
 gem "figaro"
 gem "friendly_id"
@@ -30,6 +30,7 @@ end
 
 group :development, :test do
   gem "capybara"
+  gem "coveralls", require: false
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "guard", require: false

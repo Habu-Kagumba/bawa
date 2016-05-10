@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <%= f.text_field :first_name, placeholder: "Firstname", required: true %>
+  <%= f.text_field :last_name, placeholder: "Lastname", required: true %>
+  <%= f.email_field :email, placeholder: "Email", required: true %>
+
+  <%= link_to_remove_association f do %>
+    <i class="icon-close"></i> Remove Passenger
+  <% end %>
+</div>

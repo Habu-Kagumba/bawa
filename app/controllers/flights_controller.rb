@@ -1,4 +1,4 @@
-class FlightController < ApplicationController
+class FlightsController < ApplicationController
   def index
   end
 
@@ -9,17 +9,19 @@ class FlightController < ApplicationController
       destination: params[:destination]
     )
 
+    passengers = params[:passengers]
+
     flights = []
-    available_flights.each do |flight|
+    available_flights.map(&FlightPresenter.method(:new)).each do |flight|
       flights << {
         id: flight.id,
-        dtime: FlightPresenter.new(flight).departure_time,
-        atime: FlightPresenter.new(flight).arrival_time,
-        ddate: FlightPresenter.new(flight).ddate,
-        adate: FlightPresenter.new(flight).adate,
+        dtime: flight.departure_time,
+        atime: flight.arrival_time,
+        ddate: flight.ddate,
+        adate: flight.adate,
         fnumber: flight.flight_number,
         airline: flight.airline,
-        price: FlightPresenter.new(flight).flight_price,
+        price: flight.flight_price,
         dport: {
           id: flight.departure_location.id,
           name: flight.departure_location.name,
@@ -35,11 +37,12 @@ class FlightController < ApplicationController
 
     @result = {
       count: flights.size,
-      results: flights
+      results: flights,
+      passengers: passengers
     }
 
     respond_to do |format|
-      format.html { render partial: "flight/search_result" }
+      format.html { render partial: "flights/search_result" }
       format.json { render json: @result.as_json }
     end
   end

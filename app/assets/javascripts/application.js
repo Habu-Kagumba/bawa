@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require init
+//= require cocoon
 //= require main/header
 //= require main/users
 //= require main/auth
 //= require main/flight
+//= require main/booking

@@ -1,0 +1,258 @@
+.booking-pg {
+  display: flex;
+  flex-flow: row wrap;
+
+  nav {
+    border-bottom: 1px solid transparentize($white, .8);
+    color: $white;
+    flex: 1 100%;
+    font-weight: bold;
+    padding: 10px 0;
+
+    i {
+      color: $white;
+
+      &.rpt {
+        font-size: em(13);
+        padding-left: 18px;
+        text-shadow: -5px 0 0 transparentize($white, .6), -10px 0 0 transparentize($white, .4);
+        vertical-align: middle;
+      }
+    }
+
+    small {
+      color: $white;
+      margin-left: 10px;
+    }
+  }
+
+  .review-booking {
+    background-color: transparentize($white, .2);
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 20px;
+    width: 100%;
+
+    section {
+      flex: 2 65%;
+
+      nav {
+        border-bottom: 0;
+        background-color: lighten($color-sec, 5%);
+        padding: 20px 10px;
+      }
+
+      div {
+        float: left;
+        padding: 40px 10px;
+        text-align: center;
+        width: 25%;
+
+        img {
+          margin: 0 auto;
+          max-width: 150px;
+        }
+
+        span {
+          display: block;
+          text-align: center;
+        }
+
+        &.passenger-details {
+          width: 100%;
+          h4 {
+            color: $color-sec;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+
+            i {
+              color: $color-sec;
+              font-weight: normal;
+            }
+          }
+          div {
+            &.person-icon {
+              width: 10% !important;
+              i{
+                font-size: em(25);
+                color: $color-sec;
+              }
+            }
+            &.person {
+              width: 90%;
+              border-bottom: 1px solid lighten($grey, 30%);
+
+              strong {
+                font-weight: bold;
+                color: $color-sec;
+                margin-right: 10px;
+              }
+            }
+            span {
+              text-align: left;
+            }
+          }
+        }
+
+        &.airline, &.loc_details, &.arr_details {
+          span {
+            &:nth-child(3) {
+              font-size: em(13);
+            }
+
+            &:nth-child(2) {
+              font-size: em(15);
+              font-weight: bold;
+            }
+          }
+        }
+
+        &.airline, &.loc_details, &.arr_details {
+          span {
+            color: lighten($grey, 3%);
+          }
+        }
+
+        &.sep {
+          margin-top: 30px;
+          transform: rotate(45deg);
+          width: 20% !important;
+
+          i {
+            text-align: center;
+
+            &:before {
+              margin-right: 10px;
+            }
+
+            &:after {
+              margin-left: 10px;
+            }
+
+            &:before, &:after {
+              color: lighten($grey, 10%);
+              content: "\e012";
+            }
+          }
+        }
+      }
+    }
+
+    aside {
+      background-color: $white;
+      flex: 1 35%;
+
+      nav {
+        background-color: $color-sec;
+        border-bottom: 0;
+        padding: 20px 10px;
+      }
+
+      .final-fare {
+        color: $color-sec;
+        font-size: em(25);
+        text-align: center;
+        display: block;
+        padding-top: 70px;
+        font-weight: bold;
+      }
+
+      .booking-number {
+        color: $color-sec;
+        display: block;
+        text-align: center;
+        font-size: em(20);
+        padding-top: 50px;
+      }
+
+      section.booking-form {
+        form {
+          text-align: center;
+          padding: 10px;
+
+          .passenger-nested-forms, .nested-fields {
+            width: 100%;
+            padding: 20px 10px;
+
+            .add_fields {
+              i {
+                color: $color-sec;
+              }
+            }
+
+            .remove_fields {
+              color: $color-main;
+              display: block;
+              text-align: center;
+              margin-top: 10px;
+
+              i {
+                color: $color-main;
+              }
+            }
+          }
+
+          .nested-fields {
+            .field_with_errors {
+              padding: 0;
+              width: 100%;
+
+              input {
+                background-color: lighten($color-main, 50%) !important;
+                border: 1px solid $color-main;
+                box-shadow: 0 0 5px $color-main;
+              }
+            }
+          }
+
+          .fare-details {
+            border-top: 1px solid lighten($grey, 20%);
+            color: lighten($grey, 10%);
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+
+            h4 {
+              color: $color-sec;
+              display: block;
+              font-weight: bold;
+              text-align: center;
+              padding: 10px 0;
+
+              i {
+                color: $color-sec;
+                font-weight: normal;
+              }
+            }
+
+            span {
+              color: $color-sec;
+              display: inline-block;
+              font-weight: normal;
+
+              small {
+                color: $color-sec;
+              }
+            }
+
+            .fare {
+              display: block;
+              font-size: em(25);
+              font-weight: bold;
+              padding: 10px;
+              width: 100%;
+            }
+          }
+
+          input[type=submit] {
+            text-align: center;
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+}

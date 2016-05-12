@@ -49,4 +49,12 @@ module SessionsHelper
   def store_url
     session[:url] = request.fullpath
   end
+
+  def logged_in_user
+    unless logged_in?
+      store_url
+      flash[:error] = "Please log in to continue"
+      redirect_to login_url
+    end
+  end
 end

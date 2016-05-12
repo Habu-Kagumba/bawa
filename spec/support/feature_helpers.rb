@@ -3,36 +3,27 @@ module FeatureHelpers
     @request.session[:user_id] = user.id
   end
 
+  def current_user
+    User.find(request.session[:user_id])
+  end
+
   def login_user_feature(user_email = "email")
-    create(:user)
+    @user = create(:user)
 
     visit "/login"
 
     within ".form" do
       fill_in("session_email_username",
-              with: attributes_for(:user)[user_email.to_sym])
-      fill_in("session_password", with: attributes_for(:user)[:password])
+              with: @user[user_email])
+      fill_in("session_password", with: @user.password)
       check("Remember me")
 
       click_button("Log in")
     end
   end
 
-  def update_profile(username)
-    click_link "Profile settings"
-
-    within ".user-edit-forms" do
-      fill_in("user_username", with: username)
-
-      click_button("Save changes")
-    end
-  end
-
   def search_for_flight
     within ".form" do
-      fill_in("location_name", with: "Dar El Salaam")
-      fill_in("destination_name", with: "Nairobi")
-      fill_in("when", with: "26/04/2016")
       fill_in("passengers", with: "2")
 
       click_button("Search flights")

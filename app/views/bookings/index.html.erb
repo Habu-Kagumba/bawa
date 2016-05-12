@@ -1,25 +1,28 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "View Bookings") %>
 
-<h1>Listing Bookings</h1>
+<section>
+  <div class="main-content">
+    <h1>View your bookings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="past-bookings">
+      <% @bookings.each do |booking| %>
+          <% flight = Flight.find(booking.flight_id) %>
+          <% user = User.find(booking.user_id) %>
+          <% dept = flight.departure_location %>
+          <% arr = flight.arrival_location %>
 
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Booking', new_booking_path %>
+          <div class="booking">
+              <div class="logo">
+                  <%= logo %>
+              </div>
+              <div class="details">
+                  <span><%= flight.airline %></span> <span><%= dept.name %></span> <i class="icon-plane"></i> <span><%= arr.name %></span>
+              </div>
+              <div class="view">
+                  <%= link_to "More details", booking %>
+              </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</section>

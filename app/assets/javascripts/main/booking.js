@@ -8,7 +8,7 @@ $(document).on('page:change', function () {
   }
 
   function setPrice () {
-    var thePrice = getPassengers() * getPrice()
+    var thePrice = (getPassengers() * getPrice()).toFixed(2)
     $('.fare').html('$' + thePrice)
     $('#fare-price').val(thePrice)
   }

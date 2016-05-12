@@ -36,7 +36,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "Authentication" do
     before do
-      @user = create(:user, id: 2, username: "habz", email: "h@k.com")
+      @user = create(:user, username: "habz", email: "h@k.com")
       login_as(@user)
       @user.remember
     end
@@ -63,9 +63,13 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "Validation" do
     context "validate email for login" do
+      before do
+        @user = create(:user)
+      end
+
       it do
         post :check_username_email,
-             session: { email_username: "herbert.kagumba@example.com" },
+             session: { email_username: @user.email },
              format: :json
 
         should respond_with(200)
@@ -75,9 +79,13 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "validate username for login" do
+      before do
+        @user = create(:user)
+      end
+
       it do
         post :check_username_email,
-             session: { email_username: "habu" }, format: :json
+             session: { email_username: @user.username }, format: :json
 
         should respond_with(200)
 

@@ -2,16 +2,15 @@ require "rails_helper"
 
 RSpec.describe BookingsController, type: :controller do
   before :all do
+    @user = create(:user)
     create(:flight)
-    create(:booking)
+    @booking = create(:booking, user_id: @user.id)
   end
 
   describe "Routes" do
     it { should route(:get, "/bookings").to(action: :index) }
     it { should route(:get, "/bookings/1").to(action: :show, id: 1) }
     it { should route(:get, "/bookings/new").to(action: :new) }
-    it { should route(:get, "/bookings/1/edit").to(action: :edit, id: 1) }
-    it { should route(:delete, "/bookings/1").to(action: :destroy, id: 1) }
   end
 
   describe "Index page" do
@@ -19,26 +18,34 @@ RSpec.describe BookingsController, type: :controller do
       get :index
     end
 
-    it "renders correct template" do
-      should render_template("index")
+    it "redirects to the login page" do
+      should respond_with(302)
     end
 
-    it "route resolves" do
-      should respond_with(:success)
+    it "hase all bookings of user" do
+      expect(@user.bookings.first).to eql @booking
     end
   end
 
-  describe "Show page" do
-    before do
-      get :show, id: 1
+  describe "Show page is protected" do
+    context "Anonymous user" do
+      before do
+        get :show, id: 1
+      end
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
 
-    it "route resolves" do
-      should respond_with(:success)
-    end
+    context "Registered user" do
+      before do
+        login_as @user
+        get :show, id: 1
+      end
 
-    it "renders correct template" do
-      should render_template("show")
+      it "able to access the show page" do
+        should respond_with(200)
+      end
     end
   end
 
@@ -47,36 +54,21 @@ RSpec.describe BookingsController, type: :controller do
       get :new
     end
 
-    it "route resolves" do
-      should respond_with(:success)
+    context "Anonymous user" do
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
 
-    it "renders correct template" do
-      should render_template("new")
-    end
-  end
+    context "Registered user" do
+      before do
+        login_as @user
+        get :new, id: 1
+      end
 
-  describe "Edit page" do
-    before do
-      get :edit, id: 1
-    end
-
-    it "route resolves" do
-      should respond_with(:success)
-    end
-
-    it "renders correct template" do
-      should render_template("edit")
-    end
-  end
-
-  describe "Destroy booking" do
-    before do
-      delete :destroy, id: 1
-    end
-
-    it "reoute resolves" do
-      should respond_with(302)
+      it "able to access the show page" do
+        should respond_with(200)
+      end
     end
   end
 end

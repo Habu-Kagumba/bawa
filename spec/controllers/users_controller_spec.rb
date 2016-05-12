@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  before :each do
+  before do
     @user = create(:user)
   end
 
   describe "Templates" do
     context "visit user new page" do
-      before { get :new, id: @user.id }
+      before { get :new }
 
       it { should render_template("new") }
       it { should render_with_layout("application") }

@@ -28,4 +28,14 @@ RSpec.feature "BookingPages" do
     click_button("Create Booking")
     expect(page).to have_css(".field_with_errors")
   end
+
+  scenario "Test users bookings" do
+    @booking = create(:booking, flight_id: @flight.id, user_id: @user.id)
+    make_passengers
+    click_button("Create Booking")
+    visit bookings_path
+    expect(@user.bookings).to include @booking
+    expect(page).to have_content(@user.bookings.last.flight.airline)
+    expect(page).to have_content(@user.bookings.first.flight.airline)
+  end
 end

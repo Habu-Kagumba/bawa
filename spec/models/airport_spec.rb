@@ -16,7 +16,7 @@ RSpec.describe Airport, type: :model do
   describe "Searching" do
     context "when I search for airports" do
       it "get the correct result" do
-        res = Airport.search("jkia")
+        res = Airport.search(airport.name)
         expect(airport.location).to eql res.first.location
       end
     end

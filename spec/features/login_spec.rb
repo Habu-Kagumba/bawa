@@ -30,8 +30,6 @@ RSpec.feature "Sessions" do
     end
 
     it { expect(page).to have_css(".flash-error") }
-    it { expect(page).not_to have_content("Profile") }
-    it { expect(page).not_to have_content("Logout") }
     it { expect(page).to have_content("Login") }
     it { expect(page).to have_content("Sign up") }
   end
@@ -42,7 +40,7 @@ RSpec.feature "Sessions" do
     end
 
     it { expect(page).to have_css(".flash-success") }
-    it { expect(page).to have_content("Profile") }
+    it { expect(page).to have_content("Successfully logged in") }
     it { expect(page).to have_content("Logout") }
     it { expect(page).not_to have_content("Login") }
     it { expect(page).not_to have_content("Sign up") }
@@ -54,7 +52,7 @@ RSpec.feature "Sessions" do
     end
 
     it { expect(page).to have_css(".flash-success") }
-    it { expect(page).to have_content("Profile") }
+    it { expect(page).to have_content("Successfully logged in") }
     it { expect(page).to have_content("Logout") }
     it { expect(page).not_to have_content("Login") }
     it { expect(page).not_to have_content("Sign up") }
@@ -69,18 +67,7 @@ RSpec.feature "Sessions" do
       session_cookies = get_me_the_cookie("user_id")
       expect(session_cookies).not_to be nil
       expect(page).to have_css(".flash-success")
-      expect(page).to have_content("Profile")
-      expect(page).to have_content("Logout")
-      expect(page).not_to have_content("Login")
-      expect(page).not_to have_content("Sign up")
-    end
-
-    it "user auth information stored in session cookies" do
-      expire_cookies
-
-      visit "/profile/habu"
-
-      expect(page).to have_content("Profile")
+      expect(page).to have_content("Successfully logged in")
       expect(page).to have_content("Logout")
       expect(page).not_to have_content("Login")
       expect(page).not_to have_content("Sign up")

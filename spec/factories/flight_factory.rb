@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :flight do
-    departure_date "2016-04-26 19:40"
+    departure_date { Faker::Date.between(Date.today, 1.year.from_now).to_s }
     departure_location_id 2
-    arrival_date "2016-05-26 09:20"
+    arrival_date { Faker::Date.between(3.days.from_now, 1.year.from_now).to_s }
     arrival_location_id 1
-    flight_number "JQ3451"
-    airline "KLM"
+    flight_number { Faker::Code.flight }
+    airline { Faker::Code.airline }
   end
 end

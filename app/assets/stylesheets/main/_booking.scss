@@ -256,3 +256,55 @@
     }
   }
 }
+
+.past-bookings {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  width: 90%;
+
+  .booking {
+    background-color: lighten($grey, 30%);
+    display: flex;
+    height: 110px;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+
+    .logo {
+      flex: 1 15%;
+      min-width: 100px;
+
+      img {
+        max-height: 80px;
+      }
+    }
+
+    .details {
+      align-items: center;
+      display: flex;
+      flex: 1 75%;
+      justify-content: center;
+
+      span {
+        margin: 0 10px;
+
+        &:first-child {
+          font-weight: bold;
+        }
+      }
+
+      i {
+        margin: 0 10px;
+        transform: rotate(45deg);
+      }
+    }
+
+    .view {
+      align-items: center;
+      display: flex;
+      flex: 1 10%;
+      justify-content: center;
+    }
+  }
+}

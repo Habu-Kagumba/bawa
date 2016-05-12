@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe BookingsController, type: :controller do
   before :all do
+    @user = create(:user)
     create(:flight)
     create(:booking)
   end
@@ -19,26 +20,30 @@ RSpec.describe BookingsController, type: :controller do
       get :index
     end
 
-    it "renders correct template" do
-      should render_template("index")
-    end
-
-    it "route resolves" do
-      should respond_with(:success)
+    it "redirects to the login page" do
+      should respond_with(302)
     end
   end
 
-  describe "Show page" do
-    before do
-      get :show, id: 1
+  describe "Show page is protected" do
+    context "Anonymous user" do
+      before do
+        get :show, id: 1
+      end
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
 
-    it "route resolves" do
-      should respond_with(:success)
-    end
+    context "Registered user" do
+      before do
+        login_as @user
+        get :show, id: 1
+      end
 
-    it "renders correct template" do
-      should render_template("show")
+      it "able to access the show page" do
+        should respond_with(200)
+      end
     end
   end
 
@@ -47,12 +52,21 @@ RSpec.describe BookingsController, type: :controller do
       get :new
     end
 
-    it "route resolves" do
-      should respond_with(:success)
+    context "Anonymous user" do
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
 
-    it "renders correct template" do
-      should render_template("new")
+    context "Registered user" do
+      before do
+        login_as @user
+        get :new, id: 1
+      end
+
+      it "able to access the show page" do
+        should respond_with(200)
+      end
     end
   end
 
@@ -61,12 +75,21 @@ RSpec.describe BookingsController, type: :controller do
       get :edit, id: 1
     end
 
-    it "route resolves" do
-      should respond_with(:success)
+    context "Anonymous user" do
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
 
-    it "renders correct template" do
-      should render_template("edit")
+    context "Registered user" do
+      before do
+        login_as @user
+        get :edit, id: 1
+      end
+
+      it "able to access the show page" do
+        should respond_with(200)
+      end
     end
   end
 
@@ -75,8 +98,10 @@ RSpec.describe BookingsController, type: :controller do
       delete :destroy, id: 1
     end
 
-    it "reoute resolves" do
-      should respond_with(302)
+    context "Anonymous user" do
+      it "redirects to the login page" do
+        should respond_with(302)
+      end
     end
   end
 end

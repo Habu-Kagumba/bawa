@@ -5,11 +5,10 @@ RSpec.feature "LandingPages" do
     create(:airport)
     create(:airport, name: "TZX", location: "Dar El Salaam")
     create(:flight)
-
-    visit root_path
   end
 
   scenario "Landing page elements." do
+    visit root_path
     expect(page).to have_selector(
       "h1", text: "Bawa Secure and reliable flight booking."
     )
@@ -19,11 +18,15 @@ RSpec.feature "LandingPages" do
   end
 
   scenario "Search for flights" do
+    login_user_feature
+    visit root_path
     search_for_flight
     expect(page).to have_content("1 result")
   end
 
   scenario "Choose a flight" do
+    login_user_feature
+    visit root_path
     search_for_flight
     click_button("Book Now")
 

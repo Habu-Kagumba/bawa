@@ -1,0 +1,30 @@
+Booking was successfull.
+=========================================================================
+
+You have successfully booked for your flight.
+
+Booking Details
+=========================================================================
+
+Booking id: <%= @booking.booking_id %>
+
+Airline: <%= @flights[:airline] %>, Flight Number: <%= @flights[:flight_number] %>
+
+Departure airport: <%= @flights[:dname] %>, ( <%= @flights[:dlocation] %> )
+<%= @flights[:dtime] %>, <%= @flights[:ddate] %>
+
+Arrival airport: <%= @flights[:aname] %>, ( <%= @flights[:alocation] %> )
+<%= @flights[:atime] %>, <%= @flights[:adate] %>
+
+Passenger Details:
+=========================================================================
+
+<% @booking.passengers.each do |p| %>
+
+Name: <%= p.first_name %> <%= p.last_name %>
+Email: <%= p.email %>
+
+--------------------------------------------------------------------------
+<% end %>
+
+To view your booking, follow this link: <%= @url %>

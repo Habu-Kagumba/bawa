@@ -3,12 +3,10 @@ $(document).on('page:change', function () {
     rules: {
       'user[first_name]': {
         required: true,
-        lettersonly: true,
         rangelength: [3, 25]
       },
       'user[last_name]': {
         required: true,
-        lettersonly: true,
         rangelength: [3, 25]
       },
       'user[username]': {
@@ -38,12 +36,10 @@ $(document).on('page:change', function () {
     messages: {
       'user[first_name]': {
         required: 'First name can\'t be blank',
-        lettersonly: 'First name has to contain only letters',
         rangelength: 'First name length has to be between 3 and 25 characters'
       },
       'user[last_name]': {
         required: 'Last name can\'t be blank',
-        lettersonly: 'Last name has to contain only letters',
         rangelength: 'Last name length has to be between 3 and 25 characters'
       },
       'user[username]': {

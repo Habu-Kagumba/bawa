@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
     self.last_name = last_name.capitalize
   end
 
-  LETTERS_ONLY = /\A[a-zA-Z]+\z/
-  USERNAME_REGEX = /\A[a-zA-Z0-9_]+\z/
+  LETTERS_ONLY = /\A[a-zA-Z ']+\z/
+  USERNAME_REGEX = /\A[a-zA-Z0-9_-]+\z/
 
   validates :first_name,
             presence: true,

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Flight, type: :model do
   subject(:flight) do
     create(:airport)
-    create(:airport, name: "TZX", location: "Dar El Salaam")
+    create(:airport)
     create(:flight)
   end
 
@@ -39,7 +39,7 @@ RSpec.describe Flight, type: :model do
     context "when I search for flights using airport" do
       it "using 'departure date' matches using the airport" do
         expect(flight.airline).to eq Flight.
-          filter(when: "2016-04-26 19:40").first.airline
+          filter(when: flight.departure_date.to_s).first.airline
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe Flight, type: :model do
       it "returns an array of matched results" do
         datums = [
           {
-            when: "2016-04-26",
+            when: flight.departure_date.to_s,
             location: 2,
             destination: 1
           }

@@ -37,6 +37,7 @@ group :development, :test do
   gem "guard-livereload", require: false
   gem "guard-rspec", require: false
   gem "launchy"
+  gem "letter_opener"
   gem "poltergeist"
   gem "pry-byebug"
   gem "pry-rails"

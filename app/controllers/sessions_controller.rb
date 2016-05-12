@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Successfully logged in"
       log_in(user)
       params[:session][:remember_me] == "1" ? remember(user) : forget(user)
-      redirect_to(user)
+      redirect_on_login root_path
     else
       flash.now[:error] = "Invalid email/username and password combination"
       render "new"

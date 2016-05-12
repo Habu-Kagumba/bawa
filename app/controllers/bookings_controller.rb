@@ -1,15 +1,14 @@
 class BookingsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :new]
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
   def index
-    @bookings = Booking.all
+    @bookings = Booking.all.where(user_id: current_user.id)
   end
 
   def show
     flight = Flight.find(@booking.flight_id)
     @flight = FlightPresenter.new(flight)
-
-    render :show
   end
 
   def new
@@ -43,6 +42,8 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
+    @booking.user_id = current_user.id if current_user
+
     parameters = parse_query_string(params[:parameters])
 
     locals = {
@@ -64,6 +65,8 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        BookingMailer.successful_booking(
+          @booking, current_user, locals).deliver_later
         format.html do
           redirect_to @booking,
                       notice: "Booking was successfully created."

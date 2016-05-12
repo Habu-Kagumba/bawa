@@ -5,8 +5,8 @@
     </div>
     <div class="account" id="account">
       <% if logged_in? %>
-        <%= link_to current_user do %>
-          <i class="icon-user"></i> Profile
+        <%= link_to bookings_path do %>
+          <i class="icon-user"></i> Past bookings
         <% end %>
         <%= link_to logout_path, method: "delete" do %>
           <i class="icon-logout"></i> Logout

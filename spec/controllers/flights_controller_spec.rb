@@ -30,15 +30,11 @@ RSpec.describe FlightsController, type: :controller do
 
       it "should return results for existing flights" do
         get :search_flights, format: :json,
-                             location: attributes_for(
-                               :flight)[:departure_location_id],
-                             destination: attributes_for(
-                               :flight)[:arrival_location_id],
                              when: attributes_for(:flight)[:departure_date]
 
         should respond_with(200)
 
-        expect(json["count"]).not_to be 0
+        expect(json["count"]).not_to be be_zero
       end
     end
   end

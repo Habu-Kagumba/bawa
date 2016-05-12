@@ -8,14 +8,14 @@ module FeatureHelpers
   end
 
   def login_user_feature(user_email = "email")
-    user = create(:user)
+    @user = create(:user)
 
     visit "/login"
 
     within ".form" do
       fill_in("session_email_username",
-              with: user[user_email])
-      fill_in("session_password", with: user.password)
+              with: @user[user_email])
+      fill_in("session_password", with: @user.password)
       check("Remember me")
 
       click_button("Log in")

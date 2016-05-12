@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :new]
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new]
+  before_action :set_booking, only: [:show]
 
   def index
     @bookings = Booking.all.where(user_id: current_user.id)
@@ -35,9 +35,6 @@ class BookingsController < ApplicationController
     params[:passengers].to_i.times { @booking.passengers.build }
 
     render :new, locals: locals
-  end
-
-  def edit
   end
 
   def create
@@ -75,31 +72,6 @@ class BookingsController < ApplicationController
       else
         format.html { render :new, locals: locals }
       end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html do
-          redirect_to @booking,
-                      notice: "Booking was successfully updated."
-        end
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-
-  def destroy
-    @booking.destroy
-    respond_to do |format|
-      format.html do
-        redirect_to bookings_url,
-                    notice: "Booking was successfully destroyed."
-      end
-      format.json { head :no_content }
     end
   end
 

@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new]
+  before_action :logged_in_user, only: [:index]
   before_action :set_booking, only: [:show]
 
   def index
@@ -63,7 +63,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         BookingMailer.successful_booking(
-          @booking, current_user, locals).deliver_later
+          @booking, current_user, locals).deliver_later if logged_in?
         format.html do
           redirect_to @booking,
                       notice: "Booking was successfully created."

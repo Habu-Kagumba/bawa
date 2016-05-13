@@ -22,7 +22,7 @@ RSpec.describe BookingsController, type: :controller do
       should respond_with(302)
     end
 
-    it "hase all bookings of user" do
+    it "has all bookings of user" do
       expect(@user.bookings.first).to eql @booking
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe BookingsController, type: :controller do
         get :show, id: 1
       end
       it "redirects to the login page" do
-        should respond_with(302)
+        should respond_with(200)
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe BookingsController, type: :controller do
 
     context "Anonymous user" do
       it "redirects to the login page" do
-        should respond_with(302)
+        should respond_with(200)
       end
     end
 

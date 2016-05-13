@@ -20,7 +20,7 @@
         </p>
         <p id="pass">
             <i class="icon-people"></i>
-            <%= number_field_tag "passengers", "", placeholder: "Passengers"%>
+            <%= number_field_tag "passengers", "", placeholder: "Passengers", min: 0 %>
         </p>
         <%= button_tag(type: "submit", class: "search-flights-btn") do %>
             <i class="icon-magnifier"></i> Search flights

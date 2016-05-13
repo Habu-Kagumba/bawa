@@ -44,13 +44,13 @@
 
       div {
         float: left;
-        padding: 40px 10px;
+        padding: 10px;
         text-align: center;
-        width: 25%;
+        width: 100%;
 
         img {
           margin: 0 auto;
-          max-width: 150px;
+          max-width: 110px;
         }
 
         span {
@@ -116,6 +116,7 @@
         }
 
         &.sep {
+          display: none;
           margin-top: 30px;
           transform: rotate(45deg);
           width: 20% !important;
@@ -135,6 +136,17 @@
               color: lighten($grey, 10%);
               content: "\e012";
             }
+          }
+        }
+      }
+
+      @include breakpoint($tablet) {
+        div {
+          padding: 40px 10px;
+          width: 25%;
+
+          &.sep {
+            display: inline-block;
           }
         }
       }
@@ -163,8 +175,13 @@
         color: $color-sec;
         display: block;
         text-align: center;
-        font-size: em(20);
-        padding-top: 50px;
+        font-size: em(18);
+        padding-top: 10px;
+
+        @include breakpoint($tablet) {
+          font-size: em(20);
+          padding-top: 50px;
+        }
       }
 
       section.booking-form {
@@ -249,7 +266,6 @@
 
           input[type=submit] {
             text-align: center;
-            width: 60%;
           }
         }
       }
@@ -258,10 +274,6 @@
 }
 
 .past-bookings {
-  display: flex;
-  flex-flow: row wrap;
-  margin: 0 auto;
-  width: 90%;
 
   .booking {
     background-color: lighten($grey, 30%);

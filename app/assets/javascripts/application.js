@@ -20,3 +20,4 @@
 //= require main/auth
 //= require main/flight
 //= require main/booking
+//= require main/manage

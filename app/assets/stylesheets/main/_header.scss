@@ -22,44 +22,103 @@
       width: 100%;
     }
   }
+}
 
-  .account {
-    margin: 0;
-    height: 40.6406px;
+.account {
+  @include position(fixed, 0 0 0 null);
+  background: $white;
+  height: 100%;
+  list-style: none;
+  width: 100%;
+  z-index: 0;
 
-    @include span(5 of 10 last);
+  ul.ze-menu {
+    float: right;
+    width: 200px;
 
-    a {
-      border: 1px solid $white;
-      color: $white;
-      float: left;
-      font-size: em(13);
-      height: 81%;
-      margin: 5px 3px;
-      overflow: hidden;
-      padding: 7px 0;
+    nav {
+      color: $color-sec;
+      display: block;
+      font-weight: bold;
+      padding: 20px 0;
       text-align: center;
-      width: 45%;
+      width: 100%;
+    }
 
-      i {
-        color: $white;
+    li {
+      a {
+        border-bottom: 1px solid $grey;
+        display: block;
+        padding: 10px 10px 10px 20px;
+        text-align: left;
+        width: 100%;
+
+        i, span {
+          color: $color-sec;
+        }
+      }
+
+      label {
+        color: $color-sec;
+        display: block;
+        padding: 10px 10px 10px 20px;
+        margin-top: 0;
+
+        i, span {
+          color: $color-sec;
+        }
       }
 
       &:hover {
-        background-color: $color-sec;
-        border-color: $color-sec;
-        color: $white;
-        @include transition(all .3s ease-in-out);
-      }
+        a {
+          background-color: $color-sec;
+          color: $white;
 
-      @include breakpoint($mobile){
-        font-size: em(15);
-        padding: 3px 0;
-
-        &.login-btn {
-          border: 0 !important;
+          i, span, a {
+            color: $white;
+          }
         }
-      };
+
+        label {
+          background-color: $color-sec;
+
+          i, span {
+            color: $white;
+          }
+        }
+      }
     }
   }
+}
+
+.nav-trigger {
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+label[for="nav-trigger"] {
+  @include position(fixed, 15px 25px null null);
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+
+  i {
+    color: $white;
+    font-size: em(30);
+    font-weight: bold;
+  }
+}
+
+.nav-trigger:checked + label {
+  right: 225px;
+
+}
+
+.nav-trigger:checked ~ .wrap {
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+  right: 200px;
+}
+
+.nav-trigger + label, .wrap {
+  transition: right 0.2s;
 }

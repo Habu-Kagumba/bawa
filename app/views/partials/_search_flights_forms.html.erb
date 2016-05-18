@@ -1,0 +1,23 @@
+<%= form_tag("/search_flight", remote: true, method: "get", id: "search-flights", class: "form") do %>
+  <input type="hidden" name="location" id="location">
+  <input type="hidden" name="destination" id="destination">
+  <p class="location_airport">
+    <i class="icon-plane"></i>
+    <%= text_field_tag "", "", id: "location_name", class: "typeahead", placeholder: "Select origin" %>
+  </p>
+  <p class="destination_airport">
+    <i class="icon-plane"></i>
+    <%= text_field_tag "", "", id: "destination_name", class: "typeahead", placeholder: "Select destination" %>
+  </p>
+  <p id="dept-date">
+    <i class="icon-calendar"></i>
+    <%= text_field_tag "when", "", placeholder: "Departure date", id: "ddate" %>
+  </p>
+  <p id="pass">
+    <i class="icon-people"></i>
+    <%= number_field_tag "passengers", "", placeholder: "Passengers"%>
+  </p>
+  <%= button_tag(type: "submit", class: "search-flights-btn") do %>
+    <i class="icon-magnifier"></i> Search flights
+  <% end %>
+<% end %>

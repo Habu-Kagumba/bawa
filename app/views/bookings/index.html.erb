@@ -19,7 +19,12 @@
                   <span><%= flight.airline %></span> <span><%= dept.name %></span> <i class="icon-plane"></i> <span><%= arr.name %></span>
               </div>
               <div class="view">
-                  <%= link_to "More details", booking %>
+                  <%= link_to "View", booking %>
+                  <% if flight_expired(flight.departure_date) %>
+                    <%= link_to booking, method: :delete, class: "cancel" do %>
+                      <i class="icon-trash"></i> Cancel
+                    <% end %>
+                  <% end %>
               </div>
           </div>
       <% end %>

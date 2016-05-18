@@ -4,32 +4,32 @@
     <h1>Book your flight</h1>
 
     <section class="booking-pg">
-        <nav><i class="icon-plane"></i> &nbsp;&nbsp;<%= dlocation %> <i class="icon-arrow-right rpt"></i> <%= alocation %></nav>
+        <nav><i class="icon-plane"></i> &nbsp;&nbsp;<%= f["dlocation"] %> <i class="icon-arrow-right rpt"></i> <%= f["alocation"] %></nav>
         <div class="review-booking">
             <section>
                 <nav>Review your booking</nav>
                 <div class="airline">
-                    <%= logo(airline_logo) %>
-                    <span><%= airline %></span>
-                    <span><%= flight_number %></span>
+                    <%= logo(f["airline_logo"]) %>
+                    <span><%= f["airline"] %></span>
+                    <span><%= f["flight_number"] %></span>
                 </div>
                 <div class="loc_details">
-                    <span><%= dname %></span>
-                    <span><%= dtime %> | <%= ddate %></span>
-                    <span><%= dlocation %></span>
+                    <span><%= f["dname"] %></span>
+                    <span><%= f["dtime"] %> | <%= f["ddate"] %></span>
+                    <span><%= f["dlocation"] %></span>
                 </div>
                 <div class="sep">
                     <i class="icon-plane"></i>
                 </div>
                 <div class="arr_details">
-                    <span><%= aname %></span>
-                    <span><%= atime %> | <%= adate %></span>
-                    <span><%= alocation %></span>
+                    <span><%= f["aname"] %></span>
+                    <span><%= f["atime"] %> | <%= f["adate"] %></span>
+                    <span><%= f["alocation"] %></span>
                 </div>
             </section>
             <aside>
                 <nav>Passenger details</nav>
-                <%= render "form",  flight_id: flight_id, price: price, passengers: passengers %>
+                <%= render "form",  flight_id: f["flight_id"], price: f["price"], passengers: f["passengers"] %>
             </aside>
         </div>
     </section>

@@ -1,0 +1,35 @@
+<div class="account" id="account">
+    <ul class="ze-menu">
+        <nav>Menu</nav>
+        <% if logged_in? %>
+            <li>
+                <%= link_to bookings_path do %>
+                    <i class="icon-list"></i> Past bookings
+                <% end %>
+            </li>
+            <li>
+                <%= link_to logout_path, method: "delete" do %>
+                    <i class="icon-logout"></i> Logout
+                <% end %>
+            </li>
+        <% else %>
+            <li>
+                <%= link_to login_path, class: "login-btn" do %>
+                    <i class="icon-login"></i> Login
+                <% end %>
+            </li>
+            <li>
+                <%= link_to new_user_url do %>
+                    <i class="icon-user"></i> Sign up
+                <% end %>
+            </li>
+        <% end %>
+        <li>
+            <label for="manage-check">
+                <i class="icon-settings"></i> <span class="modal-trigger">Manage Bookings</span>
+            </label>
+        </li>
+    </ul>
+</div>
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger"><i class="icon-menu"></i></label>

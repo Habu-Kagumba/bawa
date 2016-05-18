@@ -9,40 +9,40 @@
     <li>
       <div class="single-flight">
         <%= form_tag(new_booking_path, method: :get) do%>
-          <%= hidden_field_tag(:flight_id, flight[:id]) %>
+          <%= hidden_field_tag(:flight_id, flight.id) %>
           <span class="airline">
             <%= ze_logo = logo %>
             <%= hidden_field_tag(:airline_logo, parse_html(ze_logo, "//img").attr('src')) %>
-            <%= flight[:airline] %>
-            <%= hidden_field_tag(:airline, flight[:airline]) %>
-            <small><%= flight[:fnumber] %></small>
-            <%= hidden_field_tag(:flight_number, flight[:fnumber]) %>
+            <%= flight.airline %>
+            <%= hidden_field_tag(:airline, flight.airline) %>
+            <small><%= flight.flight_number %></small>
+            <%= hidden_field_tag(:flight_number, flight.flight_number) %>
           </span>
           <span class="dtimes">
-            <time><%= flight[:dtime] %></time>
-            <%= hidden_field_tag(:dtime, flight[:dtime]) %>
-            <%= hidden_field_tag(:ddate, flight[:ddate]) %>
-            <%= flight[:dport][:name] %>
-            <%= hidden_field_tag(:dname, flight[:dport][:name]) %>
-            <small><%= flight[:dport][:location] %></small>
-            <%= hidden_field_tag(:dlocation, flight[:dport][:location]) %>
+            <time><%= flight.departure_time %></time>
+            <%= hidden_field_tag(:dtime, flight.departure_time) %>
+            <%= hidden_field_tag(:ddate, flight.ddate) %>
+            <%= flight.departure_location.name %>
+            <%= hidden_field_tag(:dname, flight.departure_location.name) %>
+            <small><%= flight.departure_location.location %></small>
+            <%= hidden_field_tag(:dlocation, flight.departure_location.location) %>
           </span>
           <span class="to"><i class="icon-arrow-right"></i></span>
           <span class="atimes">
             <time>
-              <%= flight[:atime] %>
-              <%= hidden_field_tag(:atime, flight[:atime]) %>
-              <small>- <%= flight[:adate] %></small>
-              <%= hidden_field_tag(:adate, flight[:adate]) %>
+              <%= flight.arrival_time %>
+              <%= hidden_field_tag(:atime, flight.arrival_time) %>
+              <small>- <%= flight.adate %></small>
+              <%= hidden_field_tag(:adate, flight.adate) %>
             </time>
-            <%= flight[:aport][:name] %>
-            <%= hidden_field_tag(:aname, flight[:aport][:name]) %>
-            <small><%= flight[:aport][:location] %></small>
-            <%= hidden_field_tag(:alocation, flight[:aport][:location]) %>
+            <%= flight.arrival_location.name %>
+            <%= hidden_field_tag(:aname, flight.arrival_location.name) %>
+            <small><%= flight.arrival_location.location %></small>
+            <%= hidden_field_tag(:alocation, flight.arrival_location.location) %>
           </span>
           <span class="price">
-            <%= flight[:price] %>
-            <%= hidden_field_tag(:price, flight[:price]) %>
+            <%= flight.flight_price %>
+            <%= hidden_field_tag(:price, flight.flight_price) %>
             <%= hidden_field_tag(:passengers, @result[:passengers]) %>
           </span>
           <button class="booking">Book Now</button>

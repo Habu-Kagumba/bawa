@@ -23,12 +23,6 @@ RSpec.feature "BookingPages" do
     expect(page).to have_content("Booking was successfully created")
   end
 
-  scenario "Test booking saving failure" do
-    make_passengers("invalidemail")
-    click_button("Create Booking")
-    expect(page).to have_css(".field_with_errors")
-  end
-
   scenario "Test users bookings" do
     @booking = create(:booking, flight_id: @flight.id, user_id: @user.id)
     make_passengers

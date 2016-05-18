@@ -36,10 +36,16 @@ h1.homy {
       position: relative;
       width: 100%;
 
+      i {
+        @include position(absolute, 10px 10px null null);
+        z-index: 2;
+      }
+
+      &.destination_airport {
         i {
-          @include position(absolute, 10px 10px null null);
-          z-index: 2;
+          transform: rotate(90deg);
         }
+      }
     }
 
     @include breakpoint($tablet){

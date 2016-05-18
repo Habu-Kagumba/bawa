@@ -23,5 +23,7 @@ $(document).on('page:change', function () {
     setPrice()
   })
 
-  setPrice()
+  if ($('#ze_price').length > 0) {
+    setPrice()
+  }
 })

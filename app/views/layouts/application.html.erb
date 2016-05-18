@@ -10,6 +10,7 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
+        <%= render "layouts/nav" %>
         <div class="wrap">
             <%= render "layouts/header" %>
             <main class="content" id="panel">
@@ -18,6 +19,7 @@
                 <% end %>
                 <%= yield %>
             </main>
+            <%= render partial: "bookings/manage" %>
             <%= render "layouts/footer" %>
         </div>
     </body>

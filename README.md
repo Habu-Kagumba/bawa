@@ -69,6 +69,14 @@ $ rails s
 ```
 Now visit `http://localhost:3000` to view the application on your prefered web browser.
 
+### Bonus development features
+
+To enable `livereload` and auto re-run of the tests, run in your console;
+
+```
+$ guard
+```
+
 # Testing
 
 You'll have to install some more dependencies:

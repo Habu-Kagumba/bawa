@@ -62,6 +62,7 @@ $flashes: (
 @import 'main/booking';
 @import 'main/datetimepicker';
 @import 'main/animate';
+@import 'main/manage';
 
 // Main styles
 
@@ -69,15 +70,18 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0;
+  overflow-x: hidden;
   padding: 0;
 }
 body {
+
   #loading {
     display: none;
     float: right;
     position: relative;
     width: 50px;
     height: 50px;
+
     z-index: 999;
 
     .loader {
@@ -113,19 +117,21 @@ body {
   }
 
   .wrap {
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    $hero-background-top: transparentize(black, 0.2);
-    $hero-background-bottom: transparentize(black, 0.9);
-    $hero-color: white;
     $gradient-angle: -250deg;
     $header-image: '<%= asset_path 'bawa-back.png' %>';
-
+    $hero-background-bottom: transparentize(black, 0.9);
+    $hero-background-top: transparentize(black, 0.2);
+    $hero-color: white;
     @include background-image(linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), url($header-image), no-repeat $hero-background-top scroll);
+    @include position(relative, 0 0 100% null);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+    height: auto;
+    min-height: 100%;
+    min-width: 100%;
+    width: 100%;
+    z-index: 1;
 
     .content {
       @include container(1140px);

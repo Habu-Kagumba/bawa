@@ -1,0 +1,23 @@
+<div class="modal">
+  <input class="modal-state" id="manage-check" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="manage-check"></div>
+      <h1>Manage bookings</h1>
+      <p class="modal-intro">You can easily search for and edit your booking. Enter your booking number below.</p>
+      <p class="modal-content">
+        <%= form_tag("/booking", method: "get", remote: true, class: "form", id: "manage-bookings-form") do %>
+          <p id="manage-bookings-input">
+          <span class="manage-error"></span>
+            <%= text_field_tag "booking_id", "", placeholder: "Enter your booking number", required: true %>
+          </p>
+          <p id="search-bookings-btn">
+            <%= button_tag(type: "submit") do %>
+              <i class="icon-plane"></i> Search Booking
+            <% end %>
+          </p>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

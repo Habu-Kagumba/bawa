@@ -1,6 +1,89 @@
-<h1>Editing Booking</h1>
+<% provide(:title, "Edit Booking") %>
+<article>
+  <section class="main-content">
+    <h1>Edit your booking</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @booking %> |
-<%= link_to 'Back', bookings_path %>
+    <section class="booking-pg">
+      <nav class="navigation">
+          <%= link_to booking_url @booking do %>
+            <i class="icon-eye"></i> Show
+          <% end %>
+          <%= link_to edit_booking_url(@booking), class: "active" do %>
+            <i class="icon-pencil"></i> Edit
+          <% end %>
+          <% if current_user %>
+            <%= link_to @booking, method: :delete do %>
+              <i class="icon-trash"></i> Delete
+            <% end %>
+          <% end %>
+      </nav>
+      <div class="manage-booking">
+        <section>
+          <nav>Flight</nav>
+          <section class="booking-filters">
+            <%= form_for @booking, html: { class: "form", id: "edit-booking" } do |f| %>
+              <%= f.hidden_field :flight_id, id: "flight-id" %>
+              <input type="hidden" name="booking[location]" id="location" value="<%= @flight.departure_location_id %>">
+              <input type="hidden" name="booking[destination]" id="destination" value="<%= @flight.arrival_location_id %>">
+              <div class="airline">
+                <%= logo %>
+                <br>
+                <span><%= @flight.airline %></span>
+                <small><%= @flight.flight_number %></small>
+              </div>
+              <div class="booking-flights-form">
+                <span class="booking-error"></span>
+                <span class="booking-info"></span>
+                <h2>Flight Information</h2>
+                <p class="location_airport">
+                  <i class="icon-plane"></i>
+                  <%= text_field_tag "", @flight.departure_location.name, id: "booking_location_name", class: "typeahead", placeholder: "Select origin" %>
+                </p>
+                <p class="destination_airport">
+                  <i class="icon-plane"></i>
+                  <%= text_field_tag "", @flight.arrival_location.name, id: "booking_destination_name", class: "typeahead", placeholder: "Select destination" %>
+                </p>
+                <p id="dept-date">
+                  <i class="icon-calendar"></i>
+                  <%= text_field_tag "when", @flight.departure_date.strftime("%d/%m/%Y"), placeholder: "Departure date", id: "ddate", class:"booking_ddate" %>
+                </p>
+                <h2>Passenger Information</h2>
+                <div id="passengers">
+                    <% if @booking.errors.any? %>
+                        <ul class="errors">
+                            <% @booking.errors.full_messages.each do |msg| %>
+                                <li><i class="icon-close"></i> <%= msg %></li>
+                            <% end %>
+                        </ul>
+                    <% end %>
+                  <%= f.fields_for :passengers do |p| %>
+                    <%= render "passenger_fields", f: p %>
+                  <% end %>
+                  <%= link_to_add_association f, :passengers do %>
+                    <i class="icon-user"></i> Add Passenger
+                  <% end %>
+                </div>
+              </div>
+              <%= f.hidden_field :price, id: "fare-price" %>
+              <span id="ze_booking_price" style="display: none" data-price="<%= number_to_currency(@flight.price, unit: '$') %>"></span>
+              <%= f.submit %>
+            <% end %>
+          </section>
+        </section>
+        <aside>
+          <nav>Booking</nav>
+          <div class="booking_id">
+            <br>
+            <br>
+            <span>Booking Number:</span> <%= @booking.booking_id %>
+        </div>
+        <br>
+        <br>
+        <div id="booking-price">
+          <%= number_to_currency(@flight.price, unit: '$') %>
+        </div>
+      </aside>
+    </div>
+  </section>
+</section>
+</article>

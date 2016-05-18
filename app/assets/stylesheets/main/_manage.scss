@@ -1,0 +1,398 @@
+$base-border-color: #dcdcdc !default;
+$base-border-radius: 3px !default;
+$base-background-color: #fff !default;
+$base-font-size: 1em !default;
+$base-line-height: 1.5em !default;
+$action-color: #477dca !default;
+$dark-gray: #333 !default;
+$light-gray: #ddd !default;
+$tablet: 40em !default;
+$desktop: 53.75em !default;
+$base-font-color: $dark-gray !default;
+$modal-padding: 3em;
+$modal-background: $base-background-color;
+$modal-close-color: $light-gray;
+$modal-image-height: 135px;
+$modal-image-width: $modal-image-height;
+$modal-trigger-image-width: 300px;
+
+label {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+label img {
+  border-radius: $modal-trigger-image-width / 2;
+  display: block;
+  max-width: $modal-trigger-image-width;
+}
+
+.modal-state {
+  display: none;
+}
+
+.modal-fade-screen {
+  @include position(fixed, 0);
+  background-color: rgba(#000, 0.85);
+  opacity: 0;
+  padding-top: 0.6em;
+  text-align: left;
+  transition: opacity 0.25s ease;
+  visibility: hidden;
+  z-index: 99999999999;
+
+  @include breakpoint($desktop) {
+    padding-top: 10em;
+  }
+
+  .modal-bg {
+    @include position(absolute, 0);
+    cursor: pointer;
+  }
+}
+
+.modal-close {
+  @include position(absolute, ($modal-padding /2) ($modal-padding /2) null null);
+  @include size(1.5em);
+  background: $modal-background;
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    @include position(absolute, 3px 3px 0 50%);
+    @include size(0.15em 1.5em);
+    background: $modal-close-color;
+    content: "";
+    display: block;
+    margin: -3px 0 0 -1px;
+    transform: rotate(45deg);
+  }
+
+  &:hover::after,
+  &:hover::before {
+    background: darken($modal-close-color, 10%);
+  }
+
+  &::before {
+    transform: rotate(-45deg);
+  }
+}
+
+.modal-inner {
+  background: $modal-background;
+  border-radius: $base-border-radius;
+  margin: auto;
+  margin-top: 0;
+  max-height: 95%;
+  overflow: auto;
+  padding: $modal-padding / 2;
+  position: relative;
+  transition: opacity 0.25s ease;
+  width: 95%;
+
+  @include breakpoint($tablet) {
+    max-height: 70%;
+    padding: $modal-padding;
+    width: 60%;
+  }
+
+  @include breakpoint($desktop) {
+    width: 50%;
+  }
+
+  h1 {
+    color: $base-font-color;
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  p {
+    color: $base-font-color;
+    line-height: $base-line-height;
+  }
+
+  .modal-intro {
+    margin-bottom: 1em;
+  }
+
+  .modal-content {
+    color: $base-font-color;
+    @include breakpoint($tablet) {
+      columns: 2 8em;
+    }
+  }
+
+
+
+  a.cta {
+    color: $base-background-color;
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-top: 1em;
+
+    &:last-child {
+      padding: 0 2em;
+    }
+  }
+}
+
+.modal-state:checked + .modal-fade-screen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-state:checked + .modal-fade-screen .modal-inner {
+  top: 0.5em;
+
+  h1 {
+    color: $color-sec;
+  }
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.form {
+  span.manage-error {
+    @include position(absolute, null 0 -32px null);
+    background-color: $color-main;
+    color: $white;
+    display: none;
+    font-size: em(14);
+    padding: 3px;
+    &:after {
+      border: solid transparent;
+      bottom: 100%;
+      content: ' ';
+      height: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      width: 0;
+    }
+    &:after {
+      border-color: rgba(0, 0, 0, 0);
+      border-bottom-color: $color-main;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+  }
+  #manage-bookings-input {
+    float: left;
+    width: 100%;
+    position: relative;
+
+    @include breakpoint($tablet) {
+      width: 60%;
+    }
+  }
+  #search-bookings-btn {
+    float: left;
+    margin-top: 37px;
+    width: 100%;
+
+    button {
+      width: 100%;
+      i {
+        color: $white;
+      }
+    }
+
+    @include breakpoint($tablet) {
+      margin-top: 0;
+      width: 40%;
+    }
+  }
+}
+
+.manage-booking {
+  background-color: transparentize($white, .2);
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 20px;
+  width: 100%;
+
+  section {
+    flex: 2 80%;
+
+    nav {
+      border-bottom: 0;
+      background-color: lighten($color-sec, 5%);
+      padding: 20px 10px;
+    }
+
+    section {
+      &.booking-filters {
+        float: left;
+        padding: 40px 10px;
+        position: relative;
+        width: 100%;
+
+        h2 {
+          color: $color-sec;
+          margin: 20px 0;
+        }
+
+        p {
+          position: relative;
+
+          i {
+            @include position(absolute, 10px 10px null null);
+            z-index: 2;
+          }
+
+          &.location_airport {
+            float: left;
+            width: 100%;
+          }
+
+          &.destination_airport {
+            float: left;
+            width: 100%;
+
+            i {
+              transform: rotate(90deg);
+            }
+          }
+
+          &#dept-date {
+            float: left;
+            margin-bottom: 20px;
+            width: 100%
+          }
+        }
+
+
+        span {
+          &.booking-error {
+            @include position(absolute, 0 0 0 0);
+            background-color: $color-main;
+            color: $white;
+            font-size: em(14);
+            height: 30px;
+            opacity: 0;
+            padding: 3px;
+            text-align: center;
+          }
+        }
+
+        .nested-fields {
+          input {
+            float: left;
+            width: 100%;
+          }
+
+          .remove_fields {
+            color: $color-main;
+            display: inline-block;
+            padding: 10px 0;
+
+            i {
+              color: $color-main;
+            }
+          }
+        }
+
+        .add_fields {
+          border: 1px solid $color-sec;
+          float: left;
+          margin: 10px 0;
+          padding: 5px;
+
+          i {
+            color: $color-sec;
+          }
+
+          &:hover {
+            background: $color-sec;
+            color: $white;
+
+            i {
+              color: $white;
+            }
+          }
+        }
+
+        input[type="submit"] {
+          clear: both;
+          display: block;
+          float: right;
+        }
+
+        .airline {
+          float: left;
+          padding: 0px 10px 40px;
+          width: 100%;
+
+          img {
+            display: block;
+            max-width: 150px;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+          }
+
+          span {
+            display: block;
+            font-weight: bold;
+            text-align: center;
+          }
+
+          small {
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+
+      @include breakpoint($tablet) {
+        &.booking-filters {
+          p {
+            &.location_airport {
+              width: 33.3%;
+            }
+            &.destination_airport {
+              width: 33.3%;
+            }
+            &#dept-date {
+              margin-bottom: 0px;
+              width: 33.3%
+            }
+          }
+          .nested-fields {
+            input {
+              width: 33.3%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  aside {
+    background-color: $white;
+    flex: 1 20%;
+
+    nav {
+      background-color: $color-sec;
+      border-bottom: 0;
+      padding: 20px 10px;
+    }
+
+    #booking-price {
+      font-size: em(25);
+    }
+
+    .booking_id, #booking-price {
+      color: $color-sec;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+
+      span {
+        color: $grey;
+      }
+    }
+  }
+}

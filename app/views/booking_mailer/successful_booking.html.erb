@@ -243,11 +243,12 @@
                                       </tr>
                                       <tr>
                                         <td style="background-color: #ebebeb; padding: 8px; border-top: 3px solid #ffffff;">
-                                          <strong>Airline:</strong> <%= @flights[:airline] %> <small><%= @flights[:flight_number] %></small><br>
+                                          <strong>Airline:</strong> <%= @flights.airline %> <small><%= @flights.flight_number %></small><br>
                                           <br>
                                           <strong>From:</strong><br>
-                                          <strong><%= @flights[:dname] %></strong>, ( <%= @flights[:dlocation] %> ) - <%= @flights[:dtime] %> | <%= @flights[:ddate] %><br>
-                                          <strong><%= @flights[:aname] %></strong>, ( <%= @flights[:alocation] %> ) - <%= @flights[:atime] %> | <%= @flights[:adate] %><br>
+                                          <i><%= @flights.departure_location.name %></i>, ( <%= @flights.departure_location.name %> ) - <%= @flights.departure_time %> | <%= @flights.ddate %><br>
+                                          <strong>To:</strong><br>
+                                          <i><%= @flights.arrival_location.name %></i>, ( <%= @flights.arrival_location.location%> ) - <%= @flights.arrival_time %> | <%= @flights.adate %><br>
                                         </td>
                                       </tr>
                                     </table>

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :bookings
   root "flights#index"
 
+  get "booking" => "bookings#manage", as: :manage_booking
+
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"

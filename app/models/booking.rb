@@ -10,7 +10,7 @@ class Booking < ActiveRecord::Base
                                              allow_destroy: true
 
   before_save do
-    self.booking_id = Faker::Code.flight
+    self.booking_id ||= Faker::Code.flight
   end
 
   validates :flight_id,

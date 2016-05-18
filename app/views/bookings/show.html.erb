@@ -1,9 +1,17 @@
-<% provide(:title, "Bookings Confirmation") %>
+<% provide(:title, "Your Booking") %>
 <article>
     <section class="main-content">
         <h1>Booking Details</h1>
 
         <section class="booking-pg">
+            <nav class="navigation">
+                <%= link_to booking_url(@booking), class: "active" do %>
+                    <i class="icon-eye"></i> Show
+                <% end %>
+                <%= link_to edit_booking_url @booking do %>
+                    <i class="icon-pencil"></i> Edit
+                <% end %>
+            </nav>
             <div class="review-booking">
                 <section>
                     <nav>Booking</nav>

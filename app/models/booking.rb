@@ -4,13 +4,13 @@ class Booking < ActiveRecord::Base
   has_many :passengers
 
   extend FriendlyId
-  friendly_id :booking_id, use: [:slugged, :finders]
+  friendly_id :booking_code, use: [:slugged, :finders]
 
   accepts_nested_attributes_for :passengers, reject_if: :all_blank,
                                              allow_destroy: true
 
   before_save do
-    self.booking_id ||= Faker::Code.flight
+    self.booking_code ||= Faker::Code.flight
   end
 
   validates :flight_id,
@@ -19,6 +19,6 @@ class Booking < ActiveRecord::Base
   private
 
   def should_generate_new_friendly_id?
-    slug.blank? || booking_id_changed?
+    slug.blank? || booking_code_changed?
   end
 end

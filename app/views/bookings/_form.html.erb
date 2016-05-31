@@ -2,6 +2,13 @@
     <%= form_for @booking do |f| %>
         <%= f.hidden_field :flight_id %>
         <div class="passenger-nested-forms">
+          <% if @booking.errors.any? %>
+            <ul class="errors">
+              <% @booking.errors.full_messages.each do |msg| %>
+                <li><i class="icon-close"></i> <%= msg %></li>
+              <% end %>
+            </ul>
+          <% end %>
           <%= f.fields_for :passengers do |p| %>
             <%= render "passenger_fields", f: p %>
           <% end %>

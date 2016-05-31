@@ -1,33 +1,47 @@
 module FeatureHelpers
-  def login_as(user)
-    @request.session[:user_id] = user.id
-  end
-
-  def current_user
-    User.find(request.session[:user_id])
-  end
-
-  def login_user_feature(user_email = "email")
-    @user = create(:user)
-
+  def login_user(user, user_email = "email")
     visit "/login"
 
     within ".form" do
       fill_in("session_email_username",
-              with: @user[user_email])
-      fill_in("session_password", with: @user.password)
+              with: user[user_email])
+      fill_in("session_password", with: user.password)
       check("Remember me")
 
       click_button("Log in")
     end
   end
 
-  def search_for_flight
-    within ".form" do
-      fill_in("passengers", with: "2")
+  def logout_user
+    find(".nav-trigger").trigger("click")
+    click_link("Logout")
+  end
 
+  def search_for_flight(airport)
+    within ".form" do
+      fill_in("location_name", with: airport.name)
+      fill_in("passengers", with: "2")
       click_button("Search flights")
     end
+  end
+
+  def search_for_booking(booking)
+    find("span", text: "Manage Bookings").trigger("click")
+    within "#manage-bookings-form" do
+      fill_in("booking_code", with: booking.booking_code)
+      click_button("Search Booking")
+    end
+  end
+
+  def update_booking
+    click_link("Edit")
+    fill_in("booking_passengers_attributes_0_first_name",
+            with: "Herbert")
+    click_button("Update Booking")
+  end
+
+  def delete_booking
+    find("a", text: "Past bookings").trigger("click")
   end
 
   def make_passengers(email = Faker::Internet.email)

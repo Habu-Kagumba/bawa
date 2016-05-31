@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :airport do
-    name { Faker::Company.name }
+    name { Faker::Address.street_name }
     location { Faker::Address.city }
   end
 end

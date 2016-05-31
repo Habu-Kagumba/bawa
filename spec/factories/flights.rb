@@ -6,5 +6,6 @@ FactoryGirl.define do
     arrival_location_id 1
     flight_number { Faker::Code.flight }
     airline { Faker::Code.airline }
+    price { Faker::Commerce.price }
   end
 end

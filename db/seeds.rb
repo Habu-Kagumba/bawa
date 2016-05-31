@@ -1,41 +1,47 @@
 require "csv"
 
 class Seed
+  def plant_seeds
+    [Airport, Flight].map(&:destroy_all)
+    airports
+    900.times { flights }
+    puts "#{Flight.count} flights and #{Airport.count} airports seeded"
+  end
+
   def airports
-    csv_txt = File.read(Rails.root.join("lib", "seeds", "airports_sub.csv"))
-    csv = CSV.parse(csv_txt, headers: true)
-    csv.each do |row|
-      a = Airport.new
-      a.name = row["name"]
-      a.location = row["location"]
-      a.save
+    parse_airports.each do |row|
+      save_airports(row)
     end
   end
 
   def flights
     dept_arr_date = Faker::Time.forward(50, :all)
-    f = Flight.new
-    f.departure_date = dept_arr_date
-    f.arrival_date = dept_arr_date + Random.rand(0..23).hours
-    f.departure_location_id = Airport.order("RANDOM()").first.id
-    f.arrival_location_id = Airport.order("RANDOM()").first.id
-    f.flight_number = Faker::Code.flight(1..6)
-    f.airline = Faker::Code.airline
-    f.price = Faker::Commerce.price
-    f.save
+    Flight.create!(
+      departure_date: dept_arr_date,
+      arrival_date: dept_arr_date + Random.rand(0..23).hours,
+      departure_location_id: Airport.order("RANDOM()").first.id,
+      arrival_location_id: Airport.order("RANDOM()").first.id,
+      flight_number: Faker::Code.flight(1..6),
+      airline: Faker::Code.airline,
+      price: Faker::Commerce.price
+    )
   end
 
-  def plant_seeds
-    Airport.destroy_all
-    Flight.destroy_all
+  private
 
-    airports
-    900.times { flights }
+  def parse_airports
+    CSV.parse(
+      File.read(Rails.root.join("lib", "seeds", "airports_sub.csv")),
+      headers: true
+    )
+  end
 
-    puts "There are now #{Flight.count} flights in the db"
-    puts "There are now #{Airport.count} airports in the db"
+  def save_airports(row)
+    Airport.create!(
+      name: row["name"],
+      location: row["location"]
+    )
   end
 end
 
-bawa_data = Seed.new
-bawa_data.plant_seeds
+Seed.new.plant_seeds

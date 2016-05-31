@@ -1,13 +1,20 @@
 class AirportsController < ApplicationController
   def index
-    airports = Airport.search(params[:q]).order("created_at DESC")
+    render json: json_resp(search_airport)
+  end
 
-    result = {
-      count: airports.size,
-      results: airports.as_json(
+  private
+
+  def search_airport
+    Airport.search(params[:q]).order("created_at DESC")
+  end
+
+  def json_resp(result)
+    {
+      count: result.size,
+      results: result.as_json(
         only: [:id, :name, :location]
       )
     }
-    render json: result
   end
 end

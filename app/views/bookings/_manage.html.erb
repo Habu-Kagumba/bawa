@@ -9,7 +9,7 @@
         <%= form_tag("/booking", method: "get", remote: true, class: "form", id: "manage-bookings-form") do %>
           <p id="manage-bookings-input">
           <span class="manage-error"></span>
-            <%= text_field_tag "booking_id", "", placeholder: "Enter your booking number", required: true %>
+            <%= text_field_tag "booking_code", "", placeholder: "Enter your booking number", required: true %>
           </p>
           <p id="search-bookings-btn">
             <%= button_tag(type: "submit") do %>

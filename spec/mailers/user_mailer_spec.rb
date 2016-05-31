@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
-  subject(:user) { create(:user) }
+  subject(:user) { build_stubbed(:user) }
 
   describe "User signup" do
     let(:mail) { UserMailer.welcome_email(user) }

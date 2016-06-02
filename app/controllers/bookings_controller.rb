@@ -7,43 +7,33 @@ class BookingsController < ApplicationController
   end
 
   def show
-    flight = Flight.find(@booking.flight_id)
-    @flight = FlightPresenter.new(flight)
   end
 
   def new
-    @booking = Booking.new(create_booking_params)
-    @booking.user_id = current_user.id if current_user
-    locals = parse_params(params)
+    @booking = services.new_booking(
+      create_booking_params,
+      current_user
+    )
     params[:passengers].to_i.times { @booking.passengers.build }
-    render :new, locals: { f: locals }
+    render :new, locals: { f: services.parse_params(params) }
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    @booking.user_id = current_user.id if current_user
-    locals = parse_params(parse_query_string(params[:parameters]))
-    respond_to do |format|
-      if @booking.save
-        send_booking_email(@booking, current_user)
-        format.html do
-          redirect_to @booking, notice: "Booking was successfully created."
-        end
-      else
-        format.html { render :new, locals: locals }
-      end
+    @booking = services.new_booking(booking_params, current_user)
+    if @booking.save
+      successful_booking(@booking, "created")
+    else
+      render :new, locals: {
+        f: services.parse_params(
+          services.parse_query_string(params[:parameters])
+        )
+      }
     end
   end
 
   def manage
-    @booking = Booking.find_by(booking_id: params[:booking_id].upcase)
-    respond_to do |format|
-      if @booking
-        format.json { render json: @booking.as_json }
-      else
-        format.json { render json: false }
-      end
-    end
+    @booking = Booking.find_by(booking_code: params[:booking_code].upcase)
+    @booking ? (render json: @booking.as_json) : (render json: false)
   end
 
   def edit
@@ -51,8 +41,7 @@ class BookingsController < ApplicationController
 
   def update
     if @booking.update(booking_params)
-      send_booking_email(@booking, current_user)
-      redirect_to @booking, notice: "Booking was successfully updated."
+      successful_booking(@booking, "updated")
     else
       render :edit
     end
@@ -60,18 +49,15 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    respond_to do |format|
-      format.html do
-        redirect_to bookings_url, notice: "Booking successfully destroyed."
-      end
-    end
+    flash[:success] = "Booking successfully destroyed."
+    redirect_to bookings_url
   end
 
   private
 
   def set_booking_flight
     @booking = Booking.find(params[:id])
-    @flight = Flight.find(@booking.flight_id)
+    @flight = FlightPresenter.new(Flight.find(@booking.flight_id))
   end
 
   def create_booking_params
@@ -93,25 +79,13 @@ class BookingsController < ApplicationController
     )
   end
 
-  def parse_query_string(parameters)
-    Rack::Utils.parse_nested_query(parameters)
+  def services(booking = nil)
+    BookingsServices.new(booking)
   end
 
-  def parse_params(obj)
-    result = {}
-    obj.map do |k, v|
-      result[k] = v
-    end
-    result
-  end
-
-  def send_booking_email(booking, user)
-    if logged_in?
-      BookingMailer.successful_booking(booking, user).deliver_later
-    else
-      booking.passengers.map do |passenger|
-        BookingMailer.successful_booking(booking, passenger).deliver_later
-      end
-    end
+  def successful_booking(booking, msg)
+    services(booking).booking_email(current_user)
+    flash[:success] = "Booking successfully #{msg}."
+    redirect_to booking
   end
 end

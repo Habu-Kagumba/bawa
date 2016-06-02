@@ -1,17 +1,22 @@
 require "rails_helper"
 
 RSpec.describe Passenger, type: :model do
-  subject(:passenger) do
-    create(:flight)
-    create(:booking)
+  let(:flight) { create(:flight) }
+  subject do
+    create(:booking, flight_id: flight.id)
     create(:passenger)
   end
 
-  describe "Validation" do
-    context "when I create a booking" do
-      it "should be valid" do
-        expect(passenger).to be_valid
-      end
+  context "passenger model validation" do
+    it "passenger factory should be valid" do
+      should be_valid
     end
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:email) }
+  end
+
+  context "passenger model associations" do
+    it { should belong_to(:booking) }
   end
 end

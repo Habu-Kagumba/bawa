@@ -29,6 +29,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "brakeman", require: false
   gem "capybara"
   gem "coveralls", require: false
   gem "database_cleaner"
@@ -44,6 +45,7 @@ group :development, :test do
   gem "rack-livereload"
   gem "rb-fsevent", require: false
   gem "rspec-rails"
+  gem "rubycritic", require: false
   gem "shoulda-matchers"
   gem "show_me_the_cookies"
   gem "simplecov", require: false

@@ -1,94 +1,92 @@
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
-  before :each do
-    create(:user)
-  end
+  let(:user) { create(:user) }
+  let(:auth) { UserAuthenticator.new(user) }
 
-  describe "Templates" do
-    context "visit login page" do
-      before { get :new }
+  describe "Sessions pages" do
+    context "When I visit the login page" do
+      before :each do
+        get :new
+      end
 
-      it { should render_template("new") }
-      it { should render_with_layout("application") }
+      it { should render_template "new" }
+      it { should render_with_layout "application" }
     end
 
-    context "logout user" do
-      before { delete :destroy }
+    context "When I logout a user" do
+      before :each do
+        delete :destroy
+      end
 
-      it { should redirect_to(login_path) }
-    end
-  end
-
-  describe "Routing" do
-    context "visit login page" do
-      it do
-        should route(:get, "/login").to(action: :new)
+      it { should redirect_to login_path }
+      it "deletes user session" do
+        expect(session[:user_id]).to be_blank
       end
     end
 
-    context "logout user" do
-      it do
-        should route(:delete, "/logout").to(action: :destroy)
-      end
-    end
-  end
-
-  describe "Authentication" do
-    before do
-      @user = create(:user, username: "habz", email: "h@k.com")
-      login_as(@user)
-      @user.remember
-    end
-
-    context "authenticated?" do
-      it { expect(@user.authenticated?(@user.remember_token)).to be true }
-      it { expect(@user.authenticated?("password")).to be false }
-    end
-
-    context "forget user" do
-      before { @user.forget }
-      it { expect(@user.remember_digest).to be_blank }
-    end
-
-    context "logout user" do
-      before { delete :destroy }
-      it { expect(session[:user_id]).to be_blank }
-    end
-
-    context "remember user" do
-      it { expect(@user.remember_token).not_to be_blank }
-    end
-  end
-
-  describe "Validation" do
-    context "validate email for login" do
-      before do
-        @user = create(:user)
+    context "When a user successfully logs in" do
+      before :each do
+        post :create,
+             session: {
+               email_username: user.email,
+               password: user.password
+             }
       end
 
-      it do
+      it "logs in a user" do
+        expect(session[:user_id]).to eql user.id
+      end
+
+      it "can remember a user using remember_token" do
+        auth.remember_user(user)
+        expect(auth.authenticated?(user.remember_token)).to be true
+      end
+
+      it "the remember_digest is updated on remember" do
+        auth.remember_user(user)
+        expect(user.remember_digest).not_to be_nil
+      end
+    end
+
+    context "When a user fails to log in" do
+      before :each do
+        post :create,
+             session: {
+               email_username: Faker::Internet.email,
+               password: Faker::Internet.password
+             }
+      end
+
+      it "doesn't login the user" do
+        expect(session[:user_id]).to be_nil
+      end
+
+      it "renders the login page" do
+        expect(response).to render_template :new
+      end
+    end
+
+    context "When a user tries to login using their email" do
+      before :each do
         post :check_username_email,
-             session: { email_username: @user.email },
+             session: { email_username: user.email },
              format: :json
+      end
 
-        should respond_with(200)
-
+      it "checks if user exists" do
         expect(response.body).to eq "true"
       end
     end
 
-    context "validate username for login" do
-      before do
-        @user = create(:user)
+    context "When a user tries to login using their username" do
+      before :each do
+        post :check_username_email,
+             session: { email_username: user.username },
+             format: :json
       end
 
-      it do
-        post :check_username_email,
-             session: { email_username: @user.username }, format: :json
-
-        should respond_with(200)
-
+      it "checks if user exists" do
         expect(response.body).to eq "true"
       end
     end

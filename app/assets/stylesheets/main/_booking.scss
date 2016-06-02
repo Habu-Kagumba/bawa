@@ -209,6 +209,17 @@
           text-align: center;
           padding: 10px;
 
+          .errors {
+            background: $color-main;
+            li {
+              color: $white;
+              padding: 10px;
+              i {
+                color: $white;
+              }
+            }
+          }
+
           .passenger-nested-forms, .nested-fields {
             width: 100%;
             padding: 20px 10px;

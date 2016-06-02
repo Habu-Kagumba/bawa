@@ -1,24 +1,20 @@
 require "rails_helper"
 
 RSpec.describe Airport, type: :model do
-  subject(:airport) do
-    create(:airport)
-  end
+  subject { create(:airport) }
 
-  describe "Validation" do
-    context "when I create an airport" do
-      it "should be valid" do
-        expect(airport).to be_valid
-      end
+  describe "Airport model validations" do
+    it "airport factory should be valid" do
+      should be_valid
     end
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:location) }
   end
 
-  describe "Searching" do
-    context "when I search for airports" do
-      it "get the correct result" do
-        res = Airport.search(airport.name)
-        expect(airport.location).to eql res.first.location
-      end
+  context "When I search for airports" do
+    it "gets the correct airport" do
+      searched_location = Airport.search(subject.name).first.location
+      expect(subject.location).to eql searched_location
     end
   end
 end

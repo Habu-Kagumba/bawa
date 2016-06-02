@@ -1,76 +1,30 @@
 require "rails_helper"
 
 RSpec.feature "Sessions" do
-  describe "test js validation" do
-    before do
-      visit "/login"
+  let(:stubbed_user) { build(:user) }
+  let(:user) { create(:user) }
 
-      within ".form" do
-        fill_in("session_email_username", with: "")
-        fill_in("session_password", with: "")
-
-        click_button("Log in")
-      end
+  context "When a user logs in" do
+    scenario "user is unable to login with wrong credentials" do
+      login_user(stubbed_user)
+      expect(page).to have_css(".error")
     end
 
-    it { expect(page).to have_css(".error") }
-  end
-
-  describe "login with invalid information" do
-    before do
-      @user = create(:user)
-      visit "/login"
-
-      within ".form" do
-        fill_in("session_email_username", with: @user.email)
-        fill_in("session_password", with: "123s5678")
-
-        click_button("Log in")
-      end
-    end
-
-    it { expect(page).to have_css(".flash-error") }
-    it { expect(page).to have_content("Login") }
-    it { expect(page).to have_content("Sign up") }
-  end
-
-  describe "login with valid information using username" do
-    before do
-      login_user_feature("username")
-    end
-
-    it { expect(page).to have_css(".flash-success") }
-    it { expect(page).to have_content("Successfully logged in") }
-    it { expect(page).to have_content("Logout") }
-    it { expect(page).not_to have_content("Login") }
-    it { expect(page).not_to have_content("Sign up") }
-  end
-
-  describe "login with valid information using email" do
-    before do
-      login_user_feature
-    end
-
-    it { expect(page).to have_css(".flash-success") }
-    it { expect(page).to have_content("Successfully logged in") }
-    it { expect(page).to have_content("Logout") }
-    it { expect(page).not_to have_content("Login") }
-    it { expect(page).not_to have_content("Sign up") }
-  end
-
-  describe "login browser session" do
-    before do
-      login_user_feature
-    end
-
-    it "creates session cookies" do
-      session_cookies = get_me_the_cookie("user_id")
-      expect(session_cookies).not_to be nil
+    scenario "successful login" do
+      login_user(user)
       expect(page).to have_css(".flash-success")
       expect(page).to have_content("Successfully logged in")
-      expect(page).to have_content("Logout")
-      expect(page).not_to have_content("Login")
-      expect(page).not_to have_content("Sign up")
+    end
+  end
+
+  context "When a user logs out" do
+    before do
+      login_user(user)
+    end
+
+    scenario "user is redirected to login page after logout" do
+      logout_user
+      expect(page.current_path).to be_eql login_path
     end
   end
 end

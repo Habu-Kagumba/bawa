@@ -48,7 +48,7 @@
                 </section>
                 <aside>
                     <nav>Payment</nav>
-                    <span class="booking-number"><strong>Booking Number:</strong> <%= @booking.booking_id %></span>
+                    <span class="booking-number"><strong>Booking Number:</strong> <%= @booking.booking_code %></span>
                     <span class="final-fare"><%= number_to_currency(@booking.price, unit: '$') %></span>
                 </aside>
             </div>

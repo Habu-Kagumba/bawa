@@ -1,8 +1,7 @@
 class Passenger < ActiveRecord::Base
   belongs_to :booking
 
-  validates :first_name, :last_name,
+  validates :first_name, :last_name, :email,
             presence: true
-  validates :email,
-            presence: true, email: true
+  validates :email, email: true
 end

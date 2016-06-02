@@ -4,10 +4,6 @@ class Flight < ActiveRecord::Base
   has_many :bookings
   has_many :passengers
 
-  before_save do
-    self.price = Faker::Commerce.price
-  end
-
   scope :location, (lambda do |loc|
     where("departure_location_id = ?", loc)
   end)

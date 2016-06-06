@@ -6,20 +6,20 @@ You have successfully booked for your flight.
 Booking Details
 =========================================================================
 
-Booking id: <%= @booking.booking_code %>
+Booking id: <%= booking.booking_code %>
 
-Airline: <%= @flights[:airline] %>, Flight Number: <%= @flights[:flight_number] %>
+Airline: <%= flights.airline %>, Flight Number: <%= flights.flight_number %>
 
-Departure airport: <%= @flights[:dname] %>, ( <%= @flights[:dlocation] %> )
-<%= @flights[:dtime] %>, <%= @flights[:ddate] %>
+Departure airport: <%= flights.departure_location.name %>, ( <%= flights.departure_location.location %> )
+<%= flights.departure_time %>, <%= flights.ddate %>
 
-Arrival airport: <%= @flights[:aname] %>, ( <%= @flights[:alocation] %> )
-<%= @flights[:atime] %>, <%= @flights[:adate] %>
+Arrival airport: <%= flights.arrival_location.name %>, ( <%= flights.arrival_location.location %> )
+<%= flights.arrival_time %>, <%= flights.adate %>
 
 Passenger Details:
 =========================================================================
 
-<% @booking.passengers.each do |p| %>
+<% booking.passengers.each do |p| %>
 
 Name: <%= p.first_name %> <%= p.last_name %>
 Email: <%= p.email %>
@@ -27,4 +27,4 @@ Email: <%= p.email %>
 --------------------------------------------------------------------------
 <% end %>
 
-To view your booking, follow this link: <%= @url %>
+To view your booking, follow this link: <%= url %>

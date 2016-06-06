@@ -10,7 +10,7 @@ RSpec.feature "Updating bookings" do
     create(:passenger, booking_id: booking.id)
   end
 
-  shared_examples "Update a booking" do
+  context "When I search for booking" do
     before do
       visit root_path
       search_for_booking(booking)
@@ -28,7 +28,7 @@ RSpec.feature "Updating bookings" do
     end
   end
 
-  shared_examples "Delete a booking" do
+  context "When I view past bookings as a user" do
     before do
       login_user(user)
       delete_booking
@@ -44,13 +44,5 @@ RSpec.feature "Updating bookings" do
       click_link("Cancel")
       expect(page).not_to have_content(flight.airline)
     end
-  end
-
-  context "When I search for booking" do
-    it_behaves_like "Update a booking"
-  end
-
-  context "When I view past bookings as a user" do
-    it_behaves_like "Delete a booking"
   end
 end

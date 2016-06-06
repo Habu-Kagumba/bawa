@@ -6,11 +6,11 @@ RSpec.describe BookingsController, type: :controller do
   let(:airport1) { create(:airport, id: 1) }
   let(:airport2) { create(:airport, id: 2) }
   let(:booking) do
-    airport1 and airport2
+    airport1 && airport2
     build(:booking, flight_id: flight.id)
   end
   let(:other_booking) do
-    airport1 and airport2
+    airport1 && airport2
     build_stubbed(:booking, flight_id: flight.id)
   end
   let(:user_booking) do

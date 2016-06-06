@@ -4,12 +4,23 @@ RSpec.describe AirportsController, type: :controller do
   let(:json) { JSON.parse(response.body) }
   subject { create(:airport) }
 
-  context "When I search for airports" do
-    it "searches for existing airports" do
-      get :index, q: subject[:name]
+  describe "search" do
+    context "when an airport matches search" do
+      it "returns the airport that matches search" do
+        get :index, q: subject[:name]
 
-      expect(json["count"]).to eql 1
-      expect(json["results"][0]["name"]).to eql subject[:name]
+        expect(json["count"]).to eql 1
+        expect(json["results"][0]["name"]).to eql subject[:name]
+      end
+    end
+
+    context "when no airport matches search" do
+      it "returns no results if no airport found" do
+        get :index, q: Faker::Name.first_name
+
+        expect(json["count"]).to eql 0
+        expect(json["results"]).to be_blank
+      end
     end
   end
 end

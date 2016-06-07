@@ -6,7 +6,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "Sessions pages" do
     context "When I visit the login page" do
-      before :each do
+      before do
         get :new
       end
 
@@ -15,7 +15,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "When I logout a user" do
-      before :each do
+      before do
         delete :destroy
       end
 
@@ -26,7 +26,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "When a user successfully logs in" do
-      before :each do
+      before do
         post :create,
              session: {
                email_username: user.email,
@@ -50,7 +50,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "When a user fails to log in" do
-      before :each do
+      before do
         post :create,
              session: {
                email_username: Faker::Internet.email,
@@ -68,7 +68,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "When a user tries to login using their email" do
-      before :each do
+      before do
         post :check_username_email,
              session: { email_username: user.email },
              format: :json
@@ -80,7 +80,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "When a user tries to login using their username" do
-      before :each do
+      before do
         post :check_username_email,
              session: { email_username: user.username },
              format: :json

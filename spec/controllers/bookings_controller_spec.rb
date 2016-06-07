@@ -115,7 +115,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Update booking" do
     context "When booking attributes are valid" do
-      before :each do
+      before do
         booking.save
         allow(booking).to receive(:update).
           with(valid_attributes.stringify_keys) { true }
@@ -134,7 +134,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     context "When booking attributes are invalid" do
-      before :each do
+      before do
         booking.save
         allow(booking).to receive(:update).
           with(invalid_attributes.stringify_keys) { false }
@@ -149,7 +149,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Create booking" do
     context "When booking attributes are valid" do
-      before :each do
+      before do
         post :create, booking: booking.attributes
       end
 
@@ -165,7 +165,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     context "When booking attributes are invalid" do
-      before :each do
+      before do
         post :create, booking: invalid_attributes
       end
 
@@ -181,7 +181,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Delete booking" do
     context "When a booking is deleted" do
-      before :each do
+      before do
         booking.save
         delete :destroy, id: booking
       end
@@ -198,7 +198,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Manage bookings" do
     context "When a booking is retrieved" do
-      before :each do
+      before do
         allow(controller).to receive(:current_user) { user }
         booking.save
       end

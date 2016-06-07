@@ -6,8 +6,9 @@ class Booking < ActiveRecord::Base
   extend FriendlyId
   friendly_id :booking_code, use: [:slugged, :finders]
 
-  accepts_nested_attributes_for :passengers, reject_if: :all_blank,
-                                             allow_destroy: true
+  accepts_nested_attributes_for :passengers,
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   before_save do
     self.booking_code ||= Faker::Code.flight

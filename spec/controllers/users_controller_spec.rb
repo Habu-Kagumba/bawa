@@ -4,14 +4,7 @@ RSpec.describe UsersController, type: :controller do
   let(:password) { Faker::Internet.password(8) }
   let(:user_test_params) do
     {
-      user: {
-        first_name: "#{Faker::Name.first_name}xyz",
-        last_name: "#{Faker::Name.last_name}xyz",
-        email: Faker::Internet.email,
-        password: password,
-        username: "#{Faker::Name.last_name}xyz",
-        password_confirmation: password
-      }
+      user: attributes_for(:user)
     }
   end
 

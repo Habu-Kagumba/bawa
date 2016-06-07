@@ -6,7 +6,7 @@ RSpec.describe FlightsController, type: :controller do
 
   describe "Searching flights" do
     context "When I search for a flight" do
-      before :each do
+      before do
         2.times { create(:airport) }
         flight
       end

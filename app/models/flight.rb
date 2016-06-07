@@ -4,21 +4,31 @@ class Flight < ActiveRecord::Base
   has_many :bookings
   has_many :passengers
 
-  scope :location, (lambda do |loc|
-    where("departure_location_id = ?", loc)
-  end)
+  scope :location, (
+    lambda do |loc|
+      where("departure_location_id = ?", loc)
+    end
+  )
 
-  scope :destination, (lambda do |dest|
-    where("arrival_location_id = ?", dest)
-  end)
+  scope :destination, (
+    lambda do |dest|
+      where("arrival_location_id = ?", dest)
+    end
+  )
 
-  scope :when, (lambda do |ddate|
-    where("departure_date > ?", (Date.parse(ddate) - 1).to_time).
-      where("departure_date < ?", (Date.parse(ddate) + 1).to_time)
-  end)
+  scope :when, (
+    lambda do |ddate|
+      where("departure_date > ?", (Date.parse(ddate) - 1).to_time).
+        where("departure_date < ?", (Date.parse(ddate) + 1).to_time)
+    end
+  )
 
-  validates :departure_location_id, :arrival_location_id, :flight_number,
-            :airline, :departure_date, :arrival_date,
+  validates :departure_location_id,
+            :arrival_location_id,
+            :flight_number,
+            :airline,
+            :departure_date,
+            :arrival_date,
             presence: true
 
   def self.filter(filtering_params)

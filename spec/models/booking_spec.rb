@@ -6,14 +6,14 @@ RSpec.describe Booking, type: :model do
     create(:booking, flight_id: flight.id)
   end
 
-  context "booking model validation" do
+  context "Booking model validation" do
     it "booking factory should be valid" do
       should be_valid
     end
     it { should validate_presence_of(:flight_id) }
   end
 
-  context "Booking models id" do
+  context "Booking code" do
     it "creates a booking_code on save" do
       expect(subject.booking_code).not_to be_nil
     end

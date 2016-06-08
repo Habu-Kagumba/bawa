@@ -2,16 +2,16 @@ require "rails_helper"
 
 RSpec.feature do
   let(:user) { create(:user) }
-  let(:airport) { create(:airport, id: 1) }
   let(:flight) { create(:flight) }
+
   before do
-    airport && create(:airport, id: 2) && flight
+    allow(Flight).to receive(:find).with(flight.id).and_return(flight)
   end
 
   context "When I book a flight anonymously" do
     before do
       visit root_path
-      search_for_flight(airport)
+      search_for_flight(flight.departure_location)
       click_button("Book Now", match: :first)
     end
 
@@ -37,7 +37,7 @@ RSpec.feature do
     before do
       login_user(user)
       visit root_path
-      search_for_flight(airport)
+      search_for_flight(flight.departure_location)
       click_button("Book Now", match: :first)
     end
 

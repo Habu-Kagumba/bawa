@@ -8,28 +8,32 @@ RSpec.describe UsersController, type: :controller do
     }
   end
 
-  context "GET #new" do
+  describe "GET #new" do
+    subject { assigns(:user) }
+
     it "assigns a new user to the view" do
       get :new
-      expect(assigns(:user)).to be_a_new(User)
-    end
-
-    it "raises an error if missing params" do
-      user_test_params[:user][:email] = "habu@kagumba"
-      post :create, user_test_params
+      is_expected.to be_a_new(User)
       should render_template("new")
     end
   end
 
-  context "POST #create" do
-    it "redirects to the login page" do
+  describe "POST #create" do
+    it "logs in successful created user" do
       post :create, user_test_params
+      should set_flash[:success]
+      should set_session[:user_id]
+    end
 
-      expect(response).to redirect_to(root_path)
+    it "fails on validation errors" do
+      user_test_params[:user][:email] = "habu@kagumba"
+      post :create, user_test_params
+      should render_template("new")
+      should_not set_session[:user_id]
     end
   end
 
-  context "Get #check_email" do
+  describe "GET #check_email" do
     it "checks for existing emails" do
       post :check_email,
            user: { email: user_test_params[:email] },
@@ -41,7 +45,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  context "Get #check_username" do
+  describe "Get #check_username" do
     it "checks for existing usernames" do
       post :check_username,
            user: { email: user_test_params[:username] },

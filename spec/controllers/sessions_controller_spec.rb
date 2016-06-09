@@ -20,9 +20,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it { should redirect_to login_path }
-      it "deletes user session" do
-        expect(session[:user_id]).to be_blank
-      end
+      it { should_not set_session[:user_id] }
     end
 
     context "When a user successfully logs in" do
@@ -34,10 +32,7 @@ RSpec.describe SessionsController, type: :controller do
              }
       end
 
-      it "logs in a user" do
-        expect(session[:user_id]).to eql user.id
-      end
-
+      it { should set_session[:user_id] }
       it "can remember a user using remember_token" do
         auth.remember_user(user)
         expect(auth.authenticated?(user.remember_token)).to be true
@@ -58,10 +53,7 @@ RSpec.describe SessionsController, type: :controller do
              }
       end
 
-      it "doesn't login the user" do
-        expect(session[:user_id]).to be_nil
-      end
-
+      it { should_not set_session[:user_id] }
       it "renders the login page" do
         expect(response).to render_template :new
       end

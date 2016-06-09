@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "user model before_save methods" do
+  describe "user model before_save methods" do
     it "downcases email on save" do
       test_email = Faker::Internet.email
       email_user = create(:user, email: test_email.upcase)
@@ -63,11 +63,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "user model associations" do
+  describe "user model associations" do
     it { should have_many(:bookings) }
   end
 
-  context "user session encryption" do
+  describe "user session encryption" do
     it "assigns remember_digest used to remember the user" do
       UserAuthenticator.new.remember_user(subject)
       expect(subject.remember_digest).not_to be_nil

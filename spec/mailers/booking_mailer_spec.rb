@@ -2,13 +2,8 @@ require "rails_helper"
 
 RSpec.describe BookingMailer, type: :mailer do
   describe "Booking mail" do
-    before do
-      create(:airport, id: 1)
-      create(:airport, id: 2)
-    end
     let(:user) { create(:user) }
-    let(:flight) { create(:flight) }
-    let(:booking) { create(:booking, flight_id: flight.id) }
+    let(:booking) { create(:booking, user_id: user.id) }
     let(:mail) { BookingMailer.successful_booking(booking, user) }
 
     it "has the correct headers" do

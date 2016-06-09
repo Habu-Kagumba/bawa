@@ -25,25 +25,6 @@ module FeatureHelpers
     end
   end
 
-  def search_for_booking(booking)
-    find("span", text: "Manage Bookings").trigger("click")
-    within "#manage-bookings-form" do
-      fill_in("booking_code", with: booking.booking_code)
-      click_button("Search Booking")
-    end
-  end
-
-  def update_booking
-    click_link("Edit")
-    fill_in("booking_passengers_attributes_0_first_name",
-            with: "Herbert")
-    click_button("Update Booking")
-  end
-
-  def delete_booking
-    find("a", text: "Past bookings").trigger("click")
-  end
-
   def make_passengers(email = Faker::Internet.email)
     fname = Faker::Name.first_name
     lname = Faker::Name.last_name

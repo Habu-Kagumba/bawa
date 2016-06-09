@@ -2,11 +2,10 @@ require "rails_helper"
 
 RSpec.describe Flight, type: :model do
   subject do
-    2.times { create("airport") }
-    create("flight")
+    create(:flight)
   end
 
-  context "flight model validation" do
+  describe "flight model validation" do
     it "flight factory should be valid" do
       should be_valid
     end
@@ -18,11 +17,11 @@ RSpec.describe Flight, type: :model do
     it { should validate_presence_of(:arrival_date) }
   end
 
-  context "flight model associations" do
+  describe "flight model associations" do
     it { should have_many(:bookings) }
   end
 
-  context "flight model scopes and filter for searching" do
+  describe "flight model scopes and filter for searching" do
     it "can search flight by the location" do
       expect(Flight.location(subject.departure_location_id)).
         to include(subject)

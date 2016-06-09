@@ -25,6 +25,7 @@ gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 
 group :development do
+  gem "letter_opener"
   gem "web-console", "~> 2.0"
 end
 
@@ -38,8 +39,7 @@ group :development, :test do
   gem "guard-livereload", require: false
   gem "guard-rspec", require: false
   gem "launchy"
-  gem "letter_opener"
-  gem "poltergeist"
+  gem "poltergeist", git: "git://github.com/teampoltergeist/poltergeist.git"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rack-livereload"

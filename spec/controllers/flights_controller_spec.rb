@@ -7,8 +7,7 @@ RSpec.describe FlightsController, type: :controller do
   describe "Searching flights" do
     context "When I search for a flight" do
       before do
-        2.times { create(:airport) }
-        flight
+        allow(Flight).to receive(:find).with(flight.id).and_return(flight)
       end
 
       it "should return all flights if no criteria is provided" do

@@ -34,15 +34,14 @@ RSpec.describe BookingsController, type: :controller do
     context "When I view a booking" do
       before do
         allow(Booking).to receive(:find).with(booking.slug).and_return(booking)
+        get :show, id: booking
       end
 
       it "renders the show view" do
-        get :show, id: booking
         expect(response).to render_template :show
       end
 
       it "sets the booking" do
-        get :show, id: booking
         expect(assigns(:booking)).to eql booking
         expect(assigns(:flight)).to eql booking.flight
       end
@@ -61,15 +60,17 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "New booking" do
     context "When I'm creating a new booking" do
-      it "renders the new template" do
+      before do
         get :new
+      end
+
+      it "renders the new template" do
         expect(response).to render_template(:new)
       end
 
       subject { assigns(:booking) }
 
       it "creates a new booking" do
-        get :new
         is_expected.to be_a_new(Booking)
       end
     end
@@ -77,15 +78,17 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Edit booking" do
     context "When I edit a booking" do
+      before do
+        get :edit, id: booking
+      end
+
       subject { assigns(:booking) }
 
       it "retrieves the correct booking" do
-        get :edit, id: booking
         is_expected.to eql booking
       end
 
       it "renders the edit view" do
-        get :edit, id: booking
         expect(response).to render_template :edit
       end
     end
@@ -96,17 +99,16 @@ RSpec.describe BookingsController, type: :controller do
       before do
         allow(booking).to receive(:update).
           with(valid_attributes.stringify_keys) { true }
+        put :update, id: booking, booking: valid_attributes
       end
 
       subject { assigns(:booking) }
 
       it "updates the correct booking" do
-        put :update, id: booking, booking: valid_attributes
         is_expected.to eq booking
       end
 
       it "redirects to the updated booking" do
-        put :update, id: booking, booking: valid_attributes
         expect(response).to redirect_to booking
       end
     end
@@ -128,25 +130,29 @@ RSpec.describe BookingsController, type: :controller do
     context "When booking attributes are valid" do
       let(:ze_booking) { assigns(:booking) }
 
-      it "creates a new booking" do
+      before do
         post :create, booking: booking.attributes
+      end
+
+      it "creates a new booking" do
         expect(Booking.where(id: ze_booking.id)).to exist
       end
 
       it "redirects to newly created booking" do
-        post :create, booking: booking.attributes
         expect(response).to redirect_to Booking.last
       end
     end
 
     context "When booking attributes are invalid" do
-      it "doesn't manage bookings" do
+      before do
         post :create, booking: invalid_attributes
+      end
+
+      it "doesn't manage bookings" do
         expect(Booking.where(id: booking.id)).to exist
       end
 
       it "renders the new page" do
-        post :create, booking: invalid_attributes
         expect(response).to render_template :new
       end
     end
@@ -154,13 +160,15 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Delete booking" do
     context "When a booking is deleted" do
-      it "deletes a booking" do
+      before do
         delete :destroy, id: booking
+      end
+
+      it "deletes a booking" do
         expect(Booking.where(id: booking.id)).not_to exist
       end
 
       it "redirects to bookings page" do
-        delete :destroy, id: booking
         expect(response).to redirect_to bookings_url
       end
     end

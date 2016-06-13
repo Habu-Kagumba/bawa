@@ -34,10 +34,10 @@ RSpec.describe BookingsController, type: :controller do
     context "When I view a booking" do
       before do
         allow(Booking).to receive(:find).with(booking.slug).and_return(booking)
+        get :show, id: booking
       end
 
       it "renders the show view" do
-        get :show, id: booking
         expect(response).to render_template :show
         expect(assigns(:booking)).to eql booking
         expect(assigns(:flight)).to eql booking.flight
@@ -69,10 +69,13 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Edit booking" do
     context "When I edit a booking" do
+      before do
+        get :edit, id: booking
+      end
+
       subject { assigns(:booking) }
 
       it "retrieves the correct booking" do
-        get :edit, id: booking
         is_expected.to eql booking
         expect(response).to render_template :edit
       end
@@ -84,12 +87,12 @@ RSpec.describe BookingsController, type: :controller do
       before do
         allow(booking).to receive(:update).
           with(valid_attributes.stringify_keys) { true }
+        put :update, id: booking, booking: valid_attributes
       end
 
       subject { assigns(:booking) }
 
       it "updates the correct booking" do
-        put :update, id: booking, booking: valid_attributes
         is_expected.to eq booking
         expect(response).to redirect_to booking
       end
@@ -112,16 +115,22 @@ RSpec.describe BookingsController, type: :controller do
     context "When booking attributes are valid" do
       let(:ze_booking) { assigns(:booking) }
 
-      it "creates a new booking" do
+      before do
         post :create, booking: booking.attributes
+      end
+
+      it "creates a new booking" do
         expect(Booking.where(id: ze_booking.id)).to exist
         expect(response).to redirect_to Booking.last
       end
     end
 
     context "When booking attributes are invalid" do
-      it "doesn't manage bookings" do
+      before do
         post :create, booking: invalid_attributes
+      end
+
+      it "doesn't manage bookings" do
         expect(Booking.where(id: booking.id)).to exist
         expect(response).to render_template :new
       end
@@ -130,8 +139,11 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "Delete booking" do
     context "When a booking is deleted" do
-      it "deletes a booking" do
+      before do
         delete :destroy, id: booking
+      end
+
+      it "deletes a booking" do
         expect(Booking.where(id: booking.id)).not_to exist
         expect(response).to redirect_to bookings_url
       end

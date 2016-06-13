@@ -39,9 +39,6 @@ RSpec.describe BookingsController, type: :controller do
 
       it "renders the show view" do
         expect(response).to render_template :show
-      end
-
-      it "sets the booking" do
         expect(assigns(:booking)).to eql booking
         expect(assigns(:flight)).to eql booking.flight
       end
@@ -60,17 +57,11 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "New booking" do
     context "When I'm creating a new booking" do
-      before do
-        get :new
-      end
-
-      it "renders the new template" do
-        expect(response).to render_template(:new)
-      end
-
       subject { assigns(:booking) }
 
-      it "creates a new booking" do
+      it "renders the new template" do
+        get :new
+        expect(response).to render_template(:new)
         is_expected.to be_a_new(Booking)
       end
     end
@@ -86,9 +77,6 @@ RSpec.describe BookingsController, type: :controller do
 
       it "retrieves the correct booking" do
         is_expected.to eql booking
-      end
-
-      it "renders the edit view" do
         expect(response).to render_template :edit
       end
     end
@@ -106,9 +94,6 @@ RSpec.describe BookingsController, type: :controller do
 
       it "updates the correct booking" do
         is_expected.to eq booking
-      end
-
-      it "redirects to the updated booking" do
         expect(response).to redirect_to booking
       end
     end
@@ -136,9 +121,6 @@ RSpec.describe BookingsController, type: :controller do
 
       it "creates a new booking" do
         expect(Booking.where(id: ze_booking.id)).to exist
-      end
-
-      it "redirects to newly created booking" do
         expect(response).to redirect_to Booking.last
       end
     end
@@ -150,9 +132,6 @@ RSpec.describe BookingsController, type: :controller do
 
       it "doesn't manage bookings" do
         expect(Booking.where(id: booking.id)).to exist
-      end
-
-      it "renders the new page" do
         expect(response).to render_template :new
       end
     end
@@ -166,28 +145,25 @@ RSpec.describe BookingsController, type: :controller do
 
       it "deletes a booking" do
         expect(Booking.where(id: booking.id)).not_to exist
-      end
-
-      it "redirects to bookings page" do
         expect(response).to redirect_to bookings_url
       end
     end
   end
 
   describe "Manage bookings" do
-    context "When a booking is retrieved" do
-      before do
-        allow(controller).to receive(:current_user) { user_booking.user }
-      end
+    before do
+      allow(controller).to receive(:current_user) { user_booking.user }
+    end
+    subject { assigns(:booking) }
 
-      subject { assigns(:booking) }
-
-      it "should return booking with matching booking_code" do
+    context "when a booking is found" do
+      it "returns booking with the matching booking code" do
         get :manage, booking_code: booking.booking_code, format: "json"
         is_expected.to eql booking
       end
-
-      it "should return false if no booking is found" do
+    end
+    context "when a booking is not found" do
+      it "returns false" do
         get :manage, booking_code: Faker::Code.flight, format: "json"
         expect(response.body).to eql "false"
       end

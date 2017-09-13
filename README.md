@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela-hkagumba/bawa.svg?branch=develop)](https://travis-ci.org/andela-hkagumba/bawa)
+[![Build Status](https://travis-ci.org/Habu-Kagumba/bawa.svg?branch=develop)](https://travis-ci.org/Habu-Kagumba/bawa)
 [![Coverage Status](https://coveralls.io/repos/github/andela-hkagumba/bawa/badge.svg?branch=develop)](https://coveralls.io/github/andela-hkagumba/bawa?branch=develop)
 [![Code Climate](https://codeclimate.com/github/andela-hkagumba/bawa/badges/gpa.svg)](https://codeclimate.com/github/andela-hkagumba/bawa)
 
@@ -47,7 +47,7 @@ You need to install the following:
 Clone the application to your local machine:
 
 ```
-$ git clone https://github.com/andela-hkagumba/bawa.git
+$ git clone https://github.com/Habu-Kagumba/bawa.git
 ```
 
 Install the dependencies
